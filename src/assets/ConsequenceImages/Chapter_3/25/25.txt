@@ -1,0 +1,23 @@
+Scenario 25: Cybersquatting a Trademark
+A webmaster realizes a famous international shoe brand hasn't registered its .ph domain and buys it to hold for ransom.
+Decision A (Ethical): Hand over the domain at cost or let it expire.
+Immediate: The webmaster loses the small registration fee.
+Explanation: Relinquishing the domain means taking a negligible financial loss to respect another entity's trademark.
+Ripple: The brand secures its domain without issue.
+Explanation: The brand establishes its legitimate digital presence in the country smoothly.
+Long-Term: The webmaster avoids WIPO (World Intellectual Property Organization) arbitration.
+Explanation: Stepping away prevents the webmaster from being drawn into complex international legal disputes.
+Decision B (Unethical): Demand $50,000 from the brand for the domain.
+Immediate: The brand's legal team is notified.
+Explanation: Extortion via cybersquatting instantly triggers a hostile legal response from corporate entities.
+Ripple: The brand files a UDRP (Uniform Domain-Name Dispute-Resolution Policy) complaint.
+Explanation: International domain registrars have specific, aggressive protocols to seize ransomed trademarked domains.
+Long-Term: The webmaster loses the domain forcefully and pays legal penalties for bad-faith registration.
+Explanation: Cybersquatting is explicitly illegal, resulting in the forceful forfeiture of the asset and punitive fines.
+Decision C (Mixed): Build a fake fan site on the domain to make it look "legitimate" before selling it.
+Immediate: The webmaster spends hours building a dummy site.
+Explanation: The webmaster tries to create a facade of legitimate use to bypass cybersquatting laws.
+Ripple: The brand still files a dispute, arguing trademark infringement.
+Explanation: Corporate lawyers easily see through fake sites designed solely to protect squatted domains.
+Long-Term: The webmaster wastes time and money, eventually losing the domain in arbitration anyway.
+Explanation: Feigning legitimate use rarely stands up to scrutiny in international trademark arbitration.

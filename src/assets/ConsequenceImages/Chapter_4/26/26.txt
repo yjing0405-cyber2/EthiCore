@@ -1,0 +1,23 @@
+Scenario 26: Sexual Harassment in Dev Chat
+A female developer is constantly sent inappropriate messages and targeted with sexist jokes by senior male developers in the company Slack channel.
+Decision A (Ethical): Document the messages and report them to HR immediately.
+Immediate: HR opens a formal investigation.
+Explanation: Reporting triggers the necessary institutional mechanisms to protect vulnerable employees.
+Ripple: The senior developers are disciplined or fired.
+Explanation: Accountability removes toxic elements, enforcing the boundary that professional spaces must be respectful.
+Long-Term: The company establishes a safer, more inclusive culture for all employees.
+Explanation: Taking severe action against harassment proves the company's commitment to equality and psychological safety.
+Decision B (Unethical): Ignore it and tell the female developer to "toughen up."
+Immediate: The harassment continues and worsens.
+Explanation: Inaction validates the abusers, emboldening them to escalate their hostile behavior.
+Ripple: The female developer quits and goes to the media.
+Explanation: Talented individuals will abandon environments that fail to protect their basic dignity.
+Long-Term: The company faces a massive PR crisis, a hostile workplace lawsuit, and a boycott.
+Explanation: Tolerating harassment leads to devastating legal and reputational ruin for the entire organization.
+Decision C (Mixed): Delete the messages as a channel mod but don't report the developers.
+Immediate: The immediate visible evidence is gone.
+Explanation: Sweeping the issue under the rug removes the immediate visual offense but ignores the root cause.
+Ripple: The senior developers move their harassment to private messages.
+Explanation: Without formal consequences, abusers simply adapt their tactics to avoid moderation.
+Long-Term: The toxic culture remains hidden, pushing female talent out of the company silently.
+Explanation: Covering up abuse allows rot to persist, leading to a homogenous, uncreative, and hostile workplace.

@@ -1,0 +1,23 @@
+Scenario 15: Misrepresenting Capabilities
+A pre-sales engineer knows their software cannot handle 10,000 concurrent users but tells a major client it can.
+Decision A (Ethical): Tell the truth about the software's limits and offer a scalable alternative.
+Immediate: The client hesitates to sign the contract.
+Explanation: Honesty in technical sales risks losing the deal if the product doesn't meet the client's exact needs.
+Ripple: The engineering team works to actually upgrade the software's capacity.
+Explanation: Constructive feedback from missed sales drives genuine product improvement rather than reliance on lies.
+Long-Term: The client appreciates the honesty and signs a long-term upgrade contract.
+Explanation: Integrity builds lasting business relationships based on trust and realistic technical expectations.
+Decision B (Unethical): Lie to secure the massive commission.
+Immediate: The contract is signed, and the engineer gets paid.
+Explanation: The engineer prioritizes personal financial gain over professional honesty and client success.
+Ripple: The system crashes on the client's opening day.
+Explanation: Technical lies are exposed the moment the software is subjected to the promised load limits.
+Long-Term: The client sues for breach of contract, bankrupting the software firm.
+Explanation: Fraudulent misrepresentation in IT contracts leads to catastrophic legal and financial ruin for the company.
+Decision C (Mixed): Promise the capacity, but secretly force the dev team to work 80-hour weeks to build it before launch.
+Immediate: The contract is secured.
+Explanation: The engineer sells vaporware, passing the immense pressure onto the internal development team.
+Ripple: The dev team experiences massive burnout and turnover.
+Explanation: Forcing a team to fulfill impossible promises destroys morale and pushes talent to quit.
+Long-Term: The capacity is reached, but the code is a mess, leading to years of technical debt.
+Explanation: Rushed, panic-driven coding results in an unstable architecture that is incredibly costly to maintain.

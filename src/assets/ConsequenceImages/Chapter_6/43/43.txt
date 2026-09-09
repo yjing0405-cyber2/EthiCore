@@ -1,0 +1,23 @@
+Scenario 43: Using FOSS in Proprietary Software
+A developer uses a strict FOSS (Free Open-Source Software) library inside a commercial banking app that must remain closed-source.
+Decision A (Ethical): Replace the FOSS library with a commercially licensed alternative or build it from scratch.
+Immediate: The app development budget increases.
+Explanation: Doing things correctly requires either paying for commercial rights or paying for the labor to build it.
+Ripple: The banking app remains legally compliant and closed-source.
+Explanation: Replacing the restrictive library ensures the core application's proprietary status remains intact.
+Long-Term: The bank avoids severe legal and security exposure.
+Explanation: The bank's core software assets are protected from forced open-sourcing and subsequent hacker scrutiny.
+Decision B (Unethical): Use the FOSS library and hide it deep within the compiled code.
+Immediate: The developer saves time and money.
+Explanation: The developer takes a dangerous shortcut to meet deadlines, ignoring the legal implications for the client.
+Ripple: A security researcher reverse-engineers the app and finds the FOSS library.
+Explanation: Compiled code is easily decompiled by security researchers, making it impossible to truly hide stolen libraries.
+Long-Term: The bank is forced by the license to open-source its entire banking application, exposing critical security logic.
+Explanation: FOSS viral licenses legally compel the bank to release their entire proprietary source code to the public.
+Decision C (Mixed): Use the FOSS library, but host it on a separate server as a microservice to technically avoid compiling it into the app.
+Immediate: The app works, exploiting a legal gray area.
+Explanation: The developer uses network architecture to try and bypass software licensing restrictions.
+Ripple: The separate server adds latency and points of failure.
+Explanation: The technical workaround results in a slower, less reliable application for the end-users.
+Long-Term: The system suffers from poor performance, and legal debates constantly threaten the architecture.
+Explanation: Relying on legal loopholes creates fragile systems that are always one lawsuit away from collapsing.

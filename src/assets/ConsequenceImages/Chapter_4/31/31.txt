@@ -1,0 +1,23 @@
+Scenario 31: Trade Secrets and Corporate Disclosure
+A senior engineer leaves a tech giant to join a rival startup, taking USB drives full of proprietary source code.
+Decision A (Ethical): Destroy the drives before starting the new job; rely only on personal skills.
+Immediate: The engineer must rebuild solutions from scratch at the startup.
+Explanation: Respecting trade secrets means abandoning shortcuts and doing the hard intellectual labor again.
+Ripple: The engineer's skills grow immensely.
+Explanation: Building systems from the ground up forces the engineer to innovate rather than iterate on old ideas.
+Long-Term: The startup releases an original product without fear of IP litigation.
+Explanation: A clean codebase ensures the startup can seek funding and grow without a looming legal threat.
+Decision B (Unethical): Use the stolen code to accelerate the startup's launch.
+Immediate: The startup launches a competing product in record time.
+Explanation: Stealing trade secrets acts as a massive, illegal catalyst for startup growth.
+Ripple: The tech giant notices identical code structures in the startup's software.
+Explanation: Large corporations heavily monitor rivals for exact replications of their unique technical architecture.
+Long-Term: The tech giant sues, shuts down the startup, and the engineer goes to prison for corporate espionage.
+Explanation: The theft of highly proprietary corporate data is a criminal offense that results in severe penal consequences.
+Decision C (Mixed): Don't copy the code, but use the exact architectural blueprints memorized from the old job.
+Immediate: Development is fast and technically original code is written.
+Explanation: The engineer attempts to avoid copyright infringement by rewriting the code while still stealing the structural design.
+Ripple: The product functions identically to the rival's.
+Explanation: Because the underlying blueprint is the same, the software offers no real innovation.
+Long-Term: The startup faces grueling legal battles over "clean room" design violations.
+Explanation: Courts frequently rule that replicating complex architectural logic from memory still violates trade secret protections.

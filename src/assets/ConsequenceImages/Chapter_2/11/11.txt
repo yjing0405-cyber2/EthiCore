@@ -1,0 +1,23 @@
+Scenario 11: E-Commerce Fake Reviews
+An e-commerce platform developer is asked to write a script that generates thousands of fake positive reviews.
+Decision A (Ethical): Refuse, citing E-Commerce laws regarding consumer protection.  
+Immediate: The developer is taken off the project.
+Explanation: Refusing to participate in deceptive trade practices often results in internal reassignment or punishment.
+Ripple: The company struggles to gain organic traction.
+Explanation: Without the fake boost, the platform must rely on the actual quality of its products, which takes time.
+Long-Term: The company slowly builds a loyal, genuine customer base.
+Explanation: Adherence to fair e-commerce laws fosters genuine, sustainable consumer trust over time.
+Decision B (Unethical): Write the script.
+Immediate: Sales skyrocket due to fake ratings.
+Explanation: Market manipulation creates a highly profitable but entirely fraudulent surge in initial business.
+Ripple: Consumers buy subpar products and demand refunds en masse.
+Explanation: The disconnect between fake reviews and actual product quality quickly creates massive consumer backlash.
+Long-Term: The platform is sued for consumer fraud and shut down by the government.
+Explanation: Government agencies actively prosecute platforms that systematically deceive consumers under E-Commerce regulations.
+Decision C (Mixed): Write a script that only generates 5-star ratings from actual verified purchases.
+Immediate: Ratings improve, but some customers feel manipulated.
+Explanation: Pushing artificial positivity from real users is less illegal but still ethically dubious.
+Ripple: Consumer watchdogs flag the site for biased review sorting.
+Explanation: Manipulating algorithms to hide negative reviews still violates the spirit of fair consumer transparency.
+Long-Term: The company loses credibility as a neutral platform.
+Explanation: Consumers abandon platforms that they perceive as untrustworthy or heavily biased toward sellers.

@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "EthiCore",
+    "slug": "tom-samson",
+    "scheme": "ethicore",
+    "version": "1.0.3",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "src/assets/**/*"
+    ],
+    "icon": "./src/assets/App_Icon.png",
+    "ios": {
+      "icon": "./src/assets/App_Icon.png",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dct.ethicore",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "icon": "./src/assets/App_Icon.png",
+      "adaptiveIcon": {
+        "backgroundColor": "#1e40af"
+      },
+      "package": "com.dct.ethicore"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-status-bar"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b8e1cdc7-963f-4d0a-98bb-d1c9eb730b13"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "owner": "tmtmsmsns-team"
+  }
+}

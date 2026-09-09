@@ -1,0 +1,23 @@
+Scenario 10: Viewing Adult Content at Work
+A network admin catches an executive viewing illegal internet pornography on the company server.
+Decision A (Ethical): Report the violation to HR and block the sites.
+Immediate: The executive is placed on administrative leave.
+Explanation: Applying IT policies equally to all employees, regardless of rank, maintains organizational integrity.
+Ripple: The company enforces stricter acceptable use policies.
+Explanation: The incident serves as a catalyst for closing network loopholes across the entire corporate structure.
+Long-Term: The workplace remains professional, and the company avoids legal liability.
+Explanation: Decisive action protects the company from hostile work environment claims and illegal content hosting.
+Decision B (Unethical): Blackmail the executive for a promotion.
+Immediate: The admin gets promoted to IT Director.
+Explanation: The admin weaponizes their network access for personal gain, committing extortion.
+Ripple: The executive continues the behavior, exposing the network to malware.
+Explanation: Because the behavior wasn't stopped, illicit sites remain a prime vector for network infections.
+Long-Term: A ransomware attack occurs via the illicit sites, and both are fired and investigated.
+Explanation: The extortion plot collapses when the unchecked security risk destroys the company's infrastructure.
+Decision C (Mixed): Quietly block the sites without reporting the executive.
+Immediate: The executive complains about internet issues but drops it.
+Explanation: The admin resolves the technical issue silently to avoid a politically difficult confrontation.
+Ripple: The executive uses a personal device on the corporate Wi-Fi instead.
+Explanation: Without HR intervention, the user simply finds another way to bypass the technical block.
+Long-Term: The core issue isn't resolved, and the admin has to constantly play cat-and-mouse with network filters.
+Explanation: Relying solely on technical blocks without addressing user behavior leads to an endless cycle of policy circumvention.

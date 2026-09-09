@@ -1,0 +1,23 @@
+Scenario 19: Ignoring CC-BY-NC Licenses
+A digital agency uses a "Non-Commercial" Creative Commons photo for a massive corporate ad campaign.
+Decision A (Ethical): Buy a commercial stock photo instead.
+Immediate: The agency spends a small amount of money.
+Explanation: Ethical sourcing requires paying fair market value for creative assets used to generate profit.
+Ripple: The campaign proceeds without legal hitches.
+Explanation: Clearing proper commercial rights ensures the marketing campaign can run unhindered.
+Long-Term: The agency maintains a stellar reputation for IP compliance.
+Explanation: Respecting licensing restrictions builds trust with corporate clients who rely on the agency to keep them legally safe.
+Decision B (Unethical): Use the CC-BY-NC photo anyway, assuming the creator won't notice.
+Immediate: The agency saves money and launches the campaign.
+Explanation: Ignoring non-commercial clauses is a common form of corporate theft from independent creators.
+Ripple: The creator's fans notice and cause a social media uproar.
+Explanation: The internet is highly protective of independent artists, leading to rapid public backlash against the agency.
+Long-Term: The client drops the agency due to the bad PR, and the creator sues for commercial damages.
+Explanation: Flagrant violation of Creative Commons licenses destroys client trust and results in heavy financial penalties.
+Decision C (Mixed): Contact the creator and offer a tiny one-time fee to waive the NC clause.
+Immediate: The creator accepts, needing the money.
+Explanation: The agency exploits the artist's financial desperation to buy commercial rights far below market value.
+Ripple: The creator later realizes the massive scale of the campaign and feels cheated.
+Explanation: While technically a legal contract, the bad-faith negotiation damages relationships within the creative community.
+Long-Term: The agency is technically legally safe but suffers reputational damage in the creative community.
+Explanation: The agency avoids a lawsuit but becomes known as an exploitative entity among digital artists.

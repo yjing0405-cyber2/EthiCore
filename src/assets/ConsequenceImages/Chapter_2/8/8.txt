@@ -1,0 +1,23 @@
+Scenario 8: Selling User Data (DPA)
+A startup CEO plans to sell user email addresses to third-party advertisers without user consent, violating the Data Privacy Act (DPA).  
+Decision A (Ethical): Advise the CEO to implement an opt-in system to comply with the DPA.
+Immediate: The CEO is annoyed by the extra work.
+Explanation: Compliance with privacy laws requires administrative effort that often frustrates fast-moving startups.
+Ripple: Only 20% of users opt-in, reducing expected profits.
+Explanation: Ethical data collection means accepting that users have the right to refuse, impacting monetization.
+Long-Term: The company builds user trust and avoids crippling National Privacy Commission (NPC) fines.
+Explanation: Strict adherence to the DPA protects the company's longevity and prevents devastating legal penalties.
+Decision B (Unethical): Process the data export and sell it.
+Immediate: The startup receives a quick cash injection.
+Explanation: Selling unauthorized data provides immediate, illicit liquidity to the business.
+Ripple: Users receive spam and file complaints with the NPC.
+Explanation: Users are highly sensitive to unsolicited contact and will quickly mobilize to report privacy violations.
+Long-Term: The company is fined millions, and the CEO and IT staff face criminal charges.
+Explanation: Violating the DPA carries severe financial and penal consequences for everyone involved in data processing.
+Decision C (Mixed): Bury a vague "data sharing" clause deep in the Terms of Service.
+Immediate: The startup sells the data legally, barely.
+Explanation: This relies on dark patterns and legal loopholes rather than genuine user consent.
+Ripple: Privacy advocates expose the shady ToS clause online.
+Explanation: The tech community actively polices and publicizes deceptive privacy practices.
+Long-Term: The startup suffers a massive PR disaster and loses half its user base.
+Explanation: While legally gray, deceptive practices destroy consumer trust and irreparably damage brand value.

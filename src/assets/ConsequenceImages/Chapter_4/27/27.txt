@@ -1,0 +1,23 @@
+Scenario 27: The Problem of Just Wage
+An IT agency wins a multimillion-dollar contract but plans to pay its data-entry contractors below minimum wage.
+Decision A (Ethical): Insist on paying the contractors a legal, living wage from the massive profits.
+Immediate: The agency's profit margin slightly decreases.
+Explanation: Ethical compensation requires sacrificing maximum corporate greed to ensure basic human dignity for workers.
+Ripple: The contractors are motivated and produce highly accurate data.
+Explanation: Fair pay directly correlates with higher work quality, reliability, and employee morale.
+Long-Term: The agency builds a reliable, loyal workforce and wins repeat contracts.
+Explanation: A well-treated workforce provides superior service, leading to long-term business success.
+Decision B (Unethical): Proceed with the exploitative pay rate to maximize profit.
+Immediate: The agency's executives get huge bonuses.
+Explanation: Exploitation enriches those at the top at the direct expense of the laborers doing the work.
+Ripple: Contractors realize they are being exploited and work carelessly.
+Explanation: Underpaid workers have no incentive to care about data integrity, leading to massive quality drops.
+Long-Term: The client rejects the low-quality data, and the Department of Labor and Employment (DOLE) fines the agency.
+Explanation: The strategy backfires when poor outputs ruin the contract and the government punishes the wage theft.
+Decision C (Mixed): Pay minimum wage, but classify them as "interns" to avoid paying benefits.
+Immediate: Labor costs are kept artificially low.
+Explanation: This exploits legal loopholes regarding worker classification to avoid paying health and social benefits.
+Ripple: The contractors eventually leave for better jobs.
+Explanation: Workers will use the "internship" as a stepping stone and abandon the exploitative company at the first opportunity.
+Long-Term: The agency suffers from constant turnover and retraining costs.
+Explanation: The money saved on benefits is eventually lost to the constant friction of hiring and training new staff.

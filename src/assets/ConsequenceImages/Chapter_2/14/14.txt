@@ -1,0 +1,23 @@
+Scenario 14: Software Facilitating Cybercrime
+A freelance coder realizes the client is using their custom encryption tool to run a ransomware ring.
+Decision A (Ethical): Stop development and report the client to the NBI.
+Immediate: The coder loses their income source.
+Explanation: Ethical decisions in freelance work often result in the immediate forfeiture of uncollected fees.
+Ripple: The NBI uses the coder's information to track the syndicate.
+Explanation: Software developers are uniquely positioned to provide authorities with critical technical intelligence on cybercriminals.
+Long-Term: The syndicate is dismantled, and the coder is rewarded as a key informant.
+Explanation: Reporting crimes protects the public and absolves the coder from liability as an accessory.
+Decision B (Unethical): Finish the tool and demand a cut of the ransomware profits.
+Immediate: The coder becomes wealthy quickly.
+Explanation: The coder willingly transitions from an unwitting contractor to an active participant in an organized cybercrime syndicate.
+Ripple: Thousands of hospitals and schools lose their data to the tool.
+Explanation: The coder's software directly causes massive societal harm and financial devastation.
+Long-Term: Interpol tracks the tool's signature, leading to the coder's arrest and extradition.
+Explanation: Global law enforcement heavily targets the creators of ransomware infrastructure, leading to long prison sentences.
+Decision C (Mixed): Secretly build a decryption key, finish the job, and release the key online anonymously.
+Immediate: The coder gets paid by the criminal.
+Explanation: The coder justifies finishing the illegal job by installing a hidden countermeasure.
+Ripple: Victims use the anonymous key to save their data.
+Explanation: The damage of the ransomware is mitigated by the backdoor key provided by the coder.
+Long-Term: The syndicate hunts down the coder for betraying them, forcing the coder into hiding.
+Explanation: Crossing violent cybercriminal organizations poses extreme, life-threatening risks to the developer.

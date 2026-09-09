@@ -1,0 +1,23 @@
+Scenario 38: Sharing Emails Without Opt-In
+A mobile app developer is offered $10,000 by a data broker for their user base's email list, which was collected strictly for "account recovery."
+Decision A (Ethical): Reject the offer, honoring the original data collection purpose.
+Immediate: The developer loses out on $10,000.
+Explanation: Ethical data stewardship requires walking away from lucrative but illicit monetization schemes.
+Ripple: Users continue to trust the app with their data.
+Explanation: Keeping promises regarding data usage solidifies the invisible bond of trust between user and developer.
+Long-Term: The app grows organically through strong user trust and positive reviews.
+Explanation: A reputation for ironclad privacy eventually attracts more users than shady data sales could ever buy.
+Decision B (Unethical): Sell the list and pocket the money.
+Immediate: The developer gets a quick $10,000.
+Explanation: Selling unauthorized user data is a highly profitable betrayal of the user base.
+Ripple: Users receive phishing emails targeted specifically to them.
+Explanation: Data brokers sell lists to malicious actors, resulting in a surge of targeted spam and scams for the users.
+Long-Term: Users trace the leak back to the app, destroying its reputation and triggering an NPC investigation.
+Explanation: When users realize an app sold their data, they abandon it completely and report it to privacy regulators.
+Decision C (Mixed): Send an email to users asking them to opt-in to "partner offers" to legally sell their data.
+Immediate: Only 5% of users opt-in.
+Explanation: When given a transparent choice, the vast majority of users will decline to have their data sold.
+Ripple: The developer sells a much smaller list for only $500.
+Explanation: Respecting consent drastically reduces the immediate profitability of data brokering.
+Long-Term: The developer legally makes a small profit, but users still view the app as slightly spammy.
+Explanation: Even when legally opting-in, users often regret the decision, associating the app with unwanted marketing.

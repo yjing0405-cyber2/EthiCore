@@ -1,0 +1,23 @@
+Scenario 12: Bypassing Security to Fix a Bug
+A developer bypasses the company's VPN and firewall to remotely push a hotfix from a coffee shop.
+Decision A (Ethical): Go back to the office or use the secure VPN to push the fix.
+Immediate: The hotfix is delayed by an hour.
+Explanation: Security protocols prioritize safe data transmission over immediate speed, causing short-term delays.
+Ripple: Users complain about the temporary bug.
+Explanation: The delay results in a brief period of customer dissatisfaction while the bug remains active.
+Long-Term: The company's infrastructure remains secure from man-in-the-middle attacks.
+Explanation: Adhering to secure access policies prevents unauthorized interception of critical corporate code.
+Decision B (Unethical): Push the fix over the public, unsecured Wi-Fi.
+Immediate: The bug is fixed instantly.
+Explanation: Bypassing security allows for rapid deployment but entirely removes the safety net.
+Ripple: A hacker intercepts the developer's credentials.
+Explanation: Public Wi-Fi networks are prime hunting grounds for credential harvesting and packet sniffing.
+Long-Term: The entire company database is wiped by the hacker a week later.
+Explanation: A single moment of compromised credentials can lead to the total destruction of corporate assets.
+Decision C (Mixed): Push the fix over public Wi-Fi, then immediately change passwords.
+Immediate: The fix is live, and the immediate threat is neutralized.
+Explanation: The developer takes a calculated risk, hoping speed outweighs the momentary exposure.
+Ripple: Security logs flag an unauthorized external login.
+Explanation: Automated security systems will still record the severe policy violation regardless of the intent.
+Long-Term: The developer faces severe disciplinary action for violating access protocols.
+Explanation: Even if disaster is avoided, organizations strictly punish the deliberate bypassing of core security measures.

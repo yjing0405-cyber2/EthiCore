@@ -1,0 +1,23 @@
+Scenario 24: Unattributed Blog Article
+A junior content manager copies a well-researched cybersecurity article and posts it on the company blog to meet a quota.
+Decision A (Ethical): Take down the post, write an original piece, or properly quote and link the original author.
+Immediate: The manager misses their quota for the week.
+Explanation: Choosing ethical content creation often means failing to meet unrealistic, volume-based administrative targets.
+Ripple: The company blog maintains its credibility.
+Explanation: Originality and proper citation are the bedrock of trustworthy tech journalism.
+Long-Term: The manager learns proper content creation and SEO practices.
+Explanation: Doing the hard work cultivates genuine writing skills and long-term professional growth.
+Decision B (Unethical): Leave it up and claim authorship.
+Immediate: The blog gets high traffic.
+Explanation: Stolen, high-quality content can yield immediate, unearned vanity metrics.
+Ripple: The original author issues a DMCA takedown notice.
+Explanation: Plagiarism is heavily policed online, leading to swift legal and technical consequences.
+Long-Term: The company's search engine ranking is penalized, and the manager is fired for plagiarism.
+Explanation: Search engines heavily punish domains for duplicate content, devastating the company's digital presence.
+Decision C (Mixed): Put a tiny, hidden link to the original author at the very bottom.
+Immediate: The blog still gets traffic, and the manager claims they "cited" it.
+Explanation: Obscuring the citation is an attempt to steal the credit while maintaining a flimsy legal defense.
+Ripple: Readers assume the company wrote it.
+Explanation: The deceptive formatting successfully misleads the audience regarding the true author.
+Long-Term: The original author publicly shames the company on social media for unethical attribution.
+Explanation: Bad-faith citations result in public relations disasters when the original creators push back.

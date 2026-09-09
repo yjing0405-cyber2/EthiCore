@@ -1,0 +1,23 @@
+Scenario 29: The Morality of Advertising
+A marketing director wants to advertise a basic automated chatbot as a "Sentient AI," misleading customers about its capabilities.
+Decision A (Ethical): Refuse the misleading campaign and market it as a "Smart Automated Assistant."
+Immediate: Initial sales hype is lower than expected.
+Explanation: Truthful advertising lacks the viral sensationalism of science-fiction promises.
+Ripple: Users who buy it are satisfied because expectations match reality.
+Explanation: Honest marketing ensures that the product fulfills the specific promises made to the consumer.
+Long-Term: The product maintains a solid 5-star rating and steady long-term sales.
+Explanation: Setting realistic expectations prevents buyer's remorse and builds sustainable brand equity.
+Decision B (Unethical): Launch the "Sentient AI" campaign.
+Immediate: Pre-orders and day-one sales break records.
+Explanation: Blatant misrepresentation easily dupes the public into spending money on non-existent technology.
+Ripple: Users quickly realize it's a basic script and feel scammed.
+Explanation: The illusion shatters immediately upon use, resulting in intense anger and feelings of betrayal.
+Long-Term: Class-action lawsuits for false advertising bankrupt the company.
+Explanation: Severe consumer deception is heavily penalized by trade commissions and ruins the company entirely.
+Decision C (Mixed): Use the term "AI-Powered" but bury the exact technical limitations in fine print.
+Immediate: Sales are strong, and legal technically has cover.
+Explanation: The company uses buzzwords to mislead while relying on the fine print to avoid outright fraud charges.
+Ripple: Tech reviewers expose the marketing spin.
+Explanation: Experts quickly dismantle misleading marketing terminology, warning consumers of the trick.
+Long-Term: The company survives legally but loses all credibility among tech-savvy consumers.
+Explanation: While avoiding lawsuits, the brand becomes synonymous with cheap gimmicks and untrustworthy marketing.

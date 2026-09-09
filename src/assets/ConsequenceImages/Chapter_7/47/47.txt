@@ -1,0 +1,23 @@
+Scenario 47: Ignoring DICT Compliance
+The Department of Information and Communication Technology (DICT) issues a mandatory cybersecurity framework for all local fintech apps. A startup ignores it to save time.  
+Decision A (Ethical): Pause feature development to fully comply with the DICT framework.
+Immediate: The startup's roadmap is delayed by a month.
+Explanation: Prioritizing security frameworks requires a temporary halt on pushing profitable new features.
+Ripple: The app's backend is fortified against modern threats.
+Explanation: Compliance with government standards naturally elevates the entire security posture of the application.
+Long-Term: The startup gains official certification, attracting institutional investors who require DICT compliance.
+Explanation: Government certification serves as a massive trust signal that attracts highly lucrative enterprise partnerships.
+Decision B (Unethical): Ignore the framework and launch the app vulnerable.
+Immediate: The app launches fast and gains users.
+Explanation: The startup prioritizes speed to market, actively ignoring federal safety mandates.
+Ripple: A routine DICT audit discovers the severe non-compliance.
+Explanation: Government agencies actively scan critical sectors to identify applications operating illegally.
+Long-Term: The app's license to operate is revoked, shutting down the business overnight.
+Explanation: The DICT has the power to completely disable platforms that pose a systemic risk to the public financial sector.
+Decision C (Mixed): Comply with only the easiest regulations and forge documents for the complex ones.
+Immediate: The startup passes the initial paper audit.
+Explanation: The company uses fraudulent documentation to bypass the expensive technical requirements of the framework.
+Ripple: A data breach occurs, prompting a deep technical investigation.
+Explanation: When the inevitable breach happens, the facade collapses under the weight of forensic scrutiny.
+Long-Term: The forgery is discovered, and the founders face criminal fraud charges.
+Explanation: Lying to government regulatory bodies elevates the situation from technical negligence to severe criminal fraud.

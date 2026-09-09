@@ -1,0 +1,23 @@
+Scenario 16: Unlicensed Third-Party Code (RA 8293)
+A startup uses a proprietary library they found online without paying the license fee to rush their app.
+Decision A (Ethical): Remove the code and write a custom version, or buy the license.
+Immediate: The app launch is delayed or costs increase.
+Explanation: Respecting Intellectual Property laws requires either investing time into original work or spending money on licenses.
+Ripple: The code base remains legally clean.
+Explanation: Avoiding stolen code ensures the software architecture is unencumbered by hidden legal liabilities.
+Long-Term: The startup grows without fear of copyright lawsuits under RA 8293.  
+Explanation: Compliance with the Intellectual Property Code of the Philippines secures the company's long-term valuation and safety.
+Decision B (Unethical): Launch the app with the stolen code.
+Immediate: The app launches successfully and cheaply.
+Explanation: Software piracy provides a massive, immediate shortcut in development timelines and budgets.
+Ripple: The original creator discovers the code via reverse engineering.
+Explanation: Modern code analysis tools make it easy for creators to detect unlicensed use of their proprietary libraries.
+Long-Term: The startup is sued, forced to shut down the app, and pays hefty damages.
+Explanation: Copyright infringement lawsuits can entirely bankrupt and destroy tech startups.
+Decision C (Mixed): Use the code, but heavily obfuscate it so it can't be recognized.
+Immediate: The app launches, and the theft goes unnoticed initially.
+Explanation: The developer actively attempts to cover up the theft using technical countermeasures.
+Ripple: Obfuscation makes debugging the app a nightmare for future developers.
+Explanation: Making code unreadable to hide theft also makes it unreadable for the team trying to maintain it.
+Long-Term: The original creator eventually finds out during an acquisition audit, killing a million-dollar buyout.
+Explanation: Deep technical due diligence during mergers and acquisitions always uncovers obfuscated stolen IP, killing deals.

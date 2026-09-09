@@ -1,0 +1,23 @@
+Scenario 9: The Internal Breach Report
+An IT manager discovers a data breach but is told by the CEO to hide it to protect the company's stock price.
+Decision A (Ethical): Report the breach to the NPC as required by law.
+Immediate: The CEO fires the IT manager.
+Explanation: Complying with mandatory reporting laws can result in immediate retaliation from corrupt leadership.
+Ripple: The NPC investigates the company and mandates security upgrades.
+Explanation: External regulatory intervention forces the company to take cybersecurity seriously.
+Long-Term: The manager wins a wrongful termination lawsuit, and users protect their exposed data.
+Explanation: The law protects whistleblowers, and transparency allows users to secure their personal accounts.
+Decision B (Unethical): Hide the breach and patch the vulnerability silently.
+Immediate: The stock price remains stable.
+Explanation: The cover-up achieves its primary goal of maintaining temporary financial illusions.
+Ripple: Hackers sell the already-stolen data on the dark web.
+Explanation: Patching the hole does not undo the fact that sensitive data is already in criminal hands.
+Long-Term: The cover-up is discovered, resulting in jail time for both the CEO and the IT manager.
+Explanation: Failing to report a breach escalates the crime from negligence to a deliberate cover-up under privacy laws.
+Decision C (Mixed): Only inform the affected users privately, without notifying authorities.
+Immediate: Users change their passwords, causing a spike in support tickets.
+Explanation: The company tries to do right by the users while still illegally hiding the breach from regulators.
+Ripple: The NPC finds out through user complaints about the unofficial notification.
+Explanation: Large-scale user notifications inevitably leak to regulatory bodies.
+Long-Term: The company faces moderate fines for failing to follow proper reporting protocols.
+Explanation: Bypassing the NPC still results in penalties, though slightly less severe than a total cover-up.

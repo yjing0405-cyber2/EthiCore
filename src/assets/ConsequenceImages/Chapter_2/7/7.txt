@@ -1,0 +1,24 @@
+Scenario 7: Scraping Competitor Data (RA 10175)
+A marketing firm asks an IT consultant to hack and scrape private customer data from a competitor's database.
+Decision A (Ethical): Decline the project, warning them of RA 10175 (Cybercrime Law).  
+DOCX
+Immediate: The firm cancels the contract.
+Explanation: Refusing illegal work means losing immediate business opportunities but strictly adhering to Philippine law.
+Ripple: The firm looks for another, less ethical hacker.
+Explanation: While the consultant does the right thing, unethical companies will often just seek more compliant accomplices.
+Long-Term: The consultant avoids prison time when the firm is eventually raided by the NBI.
+Explanation: Knowing and respecting cybercrime laws protects IT practitioners from severe criminal liability.
+Decision B (Unethical): Perform the hack for a massive fee.
+Immediate: The consultant gets paid a large sum.
+Explanation: The temptation of high payouts is the primary driver for violating the Cybercrime Prevention Act.
+Ripple: The competitor notices the breach and contacts authorities.
+Explanation: Modern databases have intrusion detection systems that make silent data theft incredibly difficult.
+Long-Term: The consultant is arrested and convicted under the Cybercrime Prevention Act.
+Explanation: The long-term consequence of illegal hacking is total loss of freedom and professional ruin.
+Decision C (Mixed): Scrape only publicly available data, ignoring the private database.
+Immediate: The firm is disappointed but pays a reduced fee.
+Explanation: This pivots an illegal request into a legal (albeit gray area) web-scraping task.
+Ripple: The competitor blocks the consultant's IP address.
+Explanation: Even legal scraping of public data is often viewed as hostile by the target network.
+Long-Term: The consultant maintains their freedom but damages their professional reputation with the client.
+Explanation: The consultant avoids jail but ends up with a dissatisfied client who wanted stolen private data.

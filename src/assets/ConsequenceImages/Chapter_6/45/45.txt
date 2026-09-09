@@ -1,0 +1,23 @@
+Scenario 45: Holding Source Code Hostage
+A freelance developer finishes a custom CRM for a client. The client pays in full, but the developer refuses to hand over the source code, demanding an extra "release fee."
+Decision A (Ethical): Hand over the source code immediately as agreed in the contract.
+Immediate: The client is satisfied and leaves a 5-star review.
+Explanation: Fulfilling contractual obligations builds a stellar professional reputation.
+Ripple: The client recommends the developer to other businesses.
+Explanation: Happy clients become the most effective marketing tool for freelance developers.
+Long-Term: The developer builds a highly lucrative freelance career based on trust.
+Explanation: Ethical behavior in freelancing generates a steady stream of high-paying, referral-based contracts.
+Decision B (Unethical): Withhold the code until the ransom is paid.
+Immediate: The client is furious and refuses to pay.
+Explanation: Attempting to extort clients immediately destroys the business relationship and halts all progress.
+Ripple: The client sues the developer for breach of contract and extortion.
+Explanation: Clients will pursue aggressive legal action when their fully paid intellectual property is held hostage.
+Long-Term: The developer is forced by a court to hand over the code, pays damages, and is blacklisted.
+Explanation: The developer loses the lawsuit, their reputation is ruined, and they are exiled from the freelance community.
+Decision C (Mixed): Give the compiled software but heavily obfuscate the source code before handing it over.
+Immediate: The client has the code but can't read or modify it.
+Explanation: The developer maliciously complies, providing useless code to guarantee the client's dependence.
+Ripple: The client has to hire the developer for every minor change.
+Explanation: The tactic temporarily succeeds in forcing the client into an ongoing, resentful maintenance contract.
+Long-Term: The client eventually realizes the trap, fires the developer, and builds a new system from scratch.
+Explanation: Clients eventually recognize they are being manipulated and will cut all ties, regardless of the cost to start over.

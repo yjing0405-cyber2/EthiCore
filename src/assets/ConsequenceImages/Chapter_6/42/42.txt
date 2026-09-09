@@ -1,0 +1,23 @@
+Scenario 42: Stealing Proprietary Algorithms
+An AI researcher leaves a tech conglomerate and takes the core proprietary machine learning algorithm they developed to start their own company.
+Decision A (Ethical): Leave the code behind; use only general knowledge to build a new, distinct algorithm.
+Immediate: The researcher's startup takes months to develop a viable product.
+Explanation: Ethical development requires the tedious process of recreating logic without using stolen code snippets.
+Ripple: The new algorithm avoids all patent infringements.
+Explanation: A truly clean build ensures the new technology is distinct enough to avoid legal entanglements.
+Long-Term: The startup is legally untouchable and successfully acquired by a third party.
+Explanation: Clean Intellectual Property is the most valuable asset a tech startup can possess during an acquisition.
+Decision B (Unethical): Copy-paste the algorithm into the startup's codebase.
+Immediate: The startup launches a highly advanced AI on day one.
+Explanation: The theft provides the startup with an immediate, multi-million dollar technological leap.
+Ripple: The tech conglomerate notices the AI's identical behavior and outputs.
+Explanation: Advanced AI models have unique behavioral fingerprints that quickly expose stolen underlying architecture.
+Long-Term: The conglomerate crushes the startup with IP lawsuits, taking ownership of the new company.
+Explanation: Courts will award ownership of the new startup to the conglomerate as restitution for the stolen trade secrets.
+Decision C (Mixed): Rewrite the code from memory, changing variable names and structure to hide the theft.
+Immediate: The startup launches quickly with a functional AI.
+Explanation: The researcher attempts to launder the stolen logic by giving it a fresh coat of paint.
+Ripple: A deep forensic code audit reveals the underlying logic is perfectly identical.
+Explanation: Expert witnesses in IP lawsuits look at the mathematical logic, not just the superficial variable names.
+Long-Term: The researcher faces a gruelling, years-long legal battle over "derived works."
+Explanation: The ambiguity of the rewrite traps the startup in legal hell, draining their resources fighting copyright claims.

@@ -1,0 +1,23 @@
+Scenario 49: Child Exploitation Material on Servers
+A server admin at a web hosting company discovers a client is hosting child exploitation material.
+Decision A (Ethical): Immediately freeze the server, preserve the evidence, and contact the NBI Anti-Cybercrime Group.  
+Immediate: The illegal site is taken offline securely.
+Explanation: The admin takes decisive action to halt the distribution of horrific content while preserving the digital crime scene.
+Ripple: The NBI uses the server logs to track down the perpetrators.
+Explanation: Properly preserved server logs are the critical evidence needed to locate and arrest the abusers.
+Long-Term: A major exploitation ring is busted, and the admin prevents further abuse.
+Explanation: IT professionals acting ethically on the front lines play a pivotal role in eradicating the worst forms of cybercrime.
+Decision B (Unethical): Delete the files and ban the user without reporting to the police, avoiding "drama."
+Immediate: The site is gone from the host's servers.
+Explanation: The admin takes the lazy way out, cleaning their own servers but ignoring the massive criminal act.
+Ripple: The perpetrator simply moves to another hosting provider and continues.
+Explanation: Deleting the account does nothing to stop the abuser; it merely displaces the crime to a new location.
+Long-Term: The admin is investigated for failing to report known exploitation under mandatory reporting laws.
+Explanation: Failing to report child exploitation when discovered is a crime in itself, leading to severe legal trouble for the admin.
+Decision C (Mixed): Email the client a warning to remove the content themselves or face termination.
+Immediate: The client panics and deletes everything.
+Explanation: The admin foolishly warns the criminal, prioritizing server hygiene over criminal justice.
+Ripple: The client destroys all forensic evidence before authorities can act.
+Explanation: The warning acts as a tip-off, allowing the abuser to wipe their tracks and escape entirely.
+Long-Term: The perpetrators escape justice completely due to the admin's tip-off.
+Explanation: The admin's cowardly desire to avoid conflict allows a dangerous predator to remain free in society.

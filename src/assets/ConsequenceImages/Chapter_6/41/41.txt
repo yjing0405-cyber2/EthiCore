@@ -1,0 +1,23 @@
+Scenario 41: Forking and Closing Open-Source
+A tech firm takes a widely used GPL-licensed open-source project, adds a new feature, and sells it as closed-source proprietary software.
+Decision A (Ethical): Release the new feature's source code back to the community, abiding by the GPL license.
+Immediate: The firm can only charge for support and services, not the software license.
+Explanation: Abiding by open-source licenses shifts the business model from selling software to selling expertise.
+Ripple: The open-source community embraces the firm and contributes code.
+Explanation: Playing by the rules turns the vast open-source community into a collaborative asset.
+Long-Term: The firm becomes highly profitable through enterprise support contracts.
+Explanation: Providing reliable support for robust open-source tools is a proven, highly ethical business model.
+Decision B (Unethical): Keep the code closed and aggressively sue anyone who copies their version.
+Immediate: The firm makes a quick profit selling licenses.
+Explanation: Stealing open-source work provides a massive product to sell with zero initial development cost.
+Ripple: The original open-source authors discover the GPL violation.
+Explanation: The open-source community actively monitors commercial software for illegal use of their public code.
+Long-Term: The firm is sued by the Free Software Foundation, forced to open their code, and loses all profits.
+Explanation: Violating copyleft licenses results in courts forcing companies to open-source their entire proprietary stack.
+Decision C (Mixed): Keep the code closed but quietly donate money to the original open-source project.
+Immediate: The firm feels they have "paid" for the code.
+Explanation: The company attempts to buy absolution through donations instead of complying with the legal license.
+Ripple: The donation doesn't change the legal reality of the GPL violation.
+Explanation: Financial contributions do not nullify the strict legal requirements of open-source distribution licenses.
+Long-Term: The firm is eventually caught and still faces legal action for license violation.
+Explanation: When discovered, the firm is still prosecuted because legal compliance cannot be bypassed with charity.

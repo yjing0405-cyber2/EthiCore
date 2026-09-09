@@ -1,0 +1,24 @@
+Scenario 50: Cooperating with a DICT Audit
+A government agency undergoes an IT infrastructure audit by the DICT. The agency's IT head knows their legacy systems are highly vulnerable.  
+DOCX
+Decision A (Ethical): Disclose all vulnerabilities transparently to the DICT auditors.
+Immediate: The IT head faces tough questions about past negligence.
+Explanation: Transparency often requires painful vulnerability, admitting past failures to secure a safer future.
+Ripple: The DICT provides a comprehensive roadmap and emergency funding to fix the flaws.
+Explanation: Auditors are ultimately there to help; honesty unlocks federal resources needed to modernize the infrastructure.
+Long-Term: The agency's systems are modernized and secured against state-sponsored hacks.
+Explanation: Embracing the audit process ultimately fortifies the nation's critical digital infrastructure.
+Decision B (Unethical): Hide the vulnerabilities and create fake security logs to pass the audit.
+Immediate: The agency passes the audit easily.
+Explanation: The IT head commits fraud against the federal government to maintain the illusion of competence.
+Ripple: A foreign threat actor easily breaches the hidden legacy vulnerabilities.
+Explanation: Faked audits do not stop actual hackers; the vulnerabilities remain wide open for exploitation.
+Long-Term: National secrets are stolen, and the IT head is prosecuted for treason and fraud.
+Explanation: Covering up national security vulnerabilities leading to a breach results in catastrophic criminal and treason charges.
+Decision C (Mixed): Fix only the superficial vulnerabilities before the audit and hide the deep architectural flaws.
+Immediate: The DICT gives the agency a passing grade with minor warnings.
+Explanation: The IT head performs security theater, presenting a polished surface while the foundation rots.
+Ripple: The deep flaws remain unpatched, acting as a ticking time bomb.
+Explanation: The core rot continues to degrade the system's stability, entirely unseen by the governing bodies.
+Long-Term: The system eventually collapses under load, causing widespread public service outages.
+Explanation: Relying on superficial patches ultimately leads to massive, systemic failure when real stress is applied.

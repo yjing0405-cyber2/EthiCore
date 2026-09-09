@@ -1,0 +1,23 @@
+Scenario 28: Gift-giving and Bribery
+A software vendor offers a new car to a company's CTO if the CTO signs a 5-year enterprise software contract.
+Decision A (Ethical): Reject the car, report the vendor, and choose software based purely on merit.
+Immediate: The vendor is disqualified from bidding.
+Explanation: Maintaining professional integrity requires immediately cutting ties with corrupt entities.
+Ripple: The company selects a much better software solution.
+Explanation: A merit-based procurement process ensures the company adopts technology that actually fits its needs.
+Long-Term: The CTO maintains their integrity, and the company thrives using efficient tools.
+Explanation: Ethical leadership protects the company from bloated contracts and maintains a pristine professional reputation.
+Decision B (Unethical): Accept the car and sign the contract.
+Immediate: The CTO drives a luxury car; the vendor secures millions.
+Explanation: The CTO prioritizes immense personal enrichment over their fiduciary duty to the organization.
+Ripple: The software turns out to be bloated, buggy, and unfit for the company's needs.
+Explanation: Bribery almost always masks inferior products that cannot compete on technical merit alone.
+Long-Term: The bribery is uncovered during an audit; the CTO is fired and prosecuted.
+Explanation: Corporate audits eventually trace the financial anomalies back to the bribe, resulting in criminal charges.
+Decision C (Mixed): Accept the car but donate it to the company raffle, then sign the contract.
+Immediate: Employees are thrilled by the raffle prize.
+Explanation: The CTO attempts to "wash" the bribe by turning it into a corporate perk.
+Ripple: The vendor expects preferential treatment.
+Explanation: The vendor still believes they bought the CTO's loyalty, regardless of what happened to the car.
+Long-Term: The conflict of interest still taints the CTO's reputation when the connection is discovered.
+Explanation: Accepting gifts of massive value from vendors always compromises the perceived objectivity of leadership.

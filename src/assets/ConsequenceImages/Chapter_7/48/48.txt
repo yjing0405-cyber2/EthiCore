@@ -1,0 +1,23 @@
+Scenario 48: DOJ Subpoena for Cloud Records
+A cloud storage provider receives a subpoena from the Department of Justice (DOJ) for records of a suspected terrorist. The suspect is a high-paying enterprise client.  
+Decision A (Ethical): Comply fully with the DOJ subpoena and surrender the records.
+Immediate: The client's account is suspended and data seized.
+Explanation: The company chooses national security over protecting a lucrative but dangerous client.
+Ripple: The DOJ prevents a planned attack using the intelligence.
+Explanation: Timely cooperation by IT providers provides the vital intelligence needed to stop catastrophic events.
+Long-Term: The provider is praised for its cooperation and gains lucrative government contracts.
+Explanation: Proving reliability to the DOJ opens doors for highly profitable, long-term federal IT infrastructure contracts.
+Decision B (Unethical): Tip off the client and delete the records to protect revenue.
+Immediate: The client escapes and the data is gone.
+Explanation: The company commits severe treason by actively aiding a known terrorist to protect their profit margins.
+Ripple: The DOJ traces the tip-off back to the provider's executives.
+Explanation: Intelligence agencies possess the capabilities to trace internal corporate communications that obstruct justice.
+Long-Term: The provider's executives are arrested for aiding a terrorist organization and obstruction of justice.
+Explanation: Executives who harbor terrorists face decades in federal prison and the total seizure of their corporate assets.
+Decision C (Mixed): Challenge the subpoena in court using every delaying tactic possible.
+Immediate: The provider buys time, keeping the client's money flowing.
+Explanation: The company weaponizes the legal system to stall the DOJ while maintaining plausible deniability.
+Ripple: The client uses the delay to quietly delete their own files.
+Explanation: The stalling tactic provides the suspect with the necessary window to destroy all incriminating digital evidence.
+Long-Term: The provider complies eventually, but the DOJ finds empty servers, damaging the provider's relationship with the government.
+Explanation: While technically legal, the provider becomes known as a haven for criminals and a hostile entity to law enforcement.

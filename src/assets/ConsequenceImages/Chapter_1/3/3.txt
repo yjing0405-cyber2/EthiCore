@@ -1,0 +1,24 @@
+Scenario 3: The Skipped Security Protocol
+A junior network admin notices a senior engineer skipping mandatory firewall checks to save time.
+Decision A (Ethical): Report the protocol violation to the IT Director.
+Immediate: The senior engineer is reprimanded.
+Explanation: Upholding standards often requires holding superiors accountable, which can create immediate workplace tension.
+Ripple: The IT department undergoes mandatory retraining.
+Explanation: The report highlights systemic complacency, prompting a department-wide reset on security importance.
+Long-Term: Network security is fortified, and a culture of accountability is established.
+Explanation: Prioritizing protocol over hierarchy creates a resilient and highly professional IT environment.
+Decision B (Unethical): Ignore it; the senior engineer knows best.
+Immediate: Work continues smoothly without conflict.
+Explanation: Silence buys temporary peace but sacrifices professional duty.
+
+Ripple: A malware infection bypasses the unchecked firewall.
+Explanation: Security protocols exist for a reason; bypassing them directly opens the door to threats.
+Long-Term: The network is compromised, resulting in data loss and the firing of both employees.
+Explanation: Complicity in negligence makes the junior admin equally responsible for the resulting disaster.
+Decision C (Mixed): Confront the engineer directly but don't report it.
+Immediate: The engineer gets defensive but fixes the current firewall issue.
+Explanation: Direct confrontation addresses the immediate technical flaw but fails to address the systemic behavior.
+Ripple: The engineer holds a grudge and makes the junior admin's work difficult.
+Explanation: Handling policy violations informally often leads to toxic interpersonal dynamics.
+Long-Term: The junior admin transfers to another department to avoid the toxic work environment.
+Explanation: The failure to use proper reporting channels ultimately damages the junior employee's career progression.

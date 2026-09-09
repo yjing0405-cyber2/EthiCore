@@ -1,0 +1,23 @@
+Scenario 4: Pressured to Release Untested Features
+A project manager demands an IT team release an untested data-migration feature to impress stakeholders.
+Decision A (Ethical): Refuse the demand, citing professional responsibility.
+Immediate: The project manager is angry, and stakeholders are disappointed.
+Explanation: Ethical pushback often requires absorbing the frustration of those prioritizing optics over quality.
+Ripple: The team uses the extra time to properly test and fix data corruption bugs.
+Explanation: Standing firm provides the necessary space to perform crucial technical validation.
+Long-Term: The feature works flawlessly upon release, proving the team's professionalism.
+Explanation: Long-term success and system stability vindicate the decision to prioritize rigorous testing.
+Decision B (Unethical): Release it as demanded to look good.
+Immediate: Stakeholders are impressed by the speed.
+Explanation: Yielding to pressure provides a false, temporary sense of achievement.
+Ripple: The feature corrupts existing client databases during migration.
+Explanation: Untested software in production environments reliably leads to catastrophic data integrity failures.
+Long-Term: The company loses major clients, and the project manager blames the IT team.
+Explanation: When unethical shortcuts fail, IT professionals are usually the ones scapegoated for the technical disaster.
+Decision C (Mixed): Release it but label it as a "Beta" feature with a warning.
+Immediate: Stakeholders get their release, and users are warned of risks.
+Explanation: This attempts to balance business demands with technical reality by shifting the risk to the user.
+Ripple: Few users try it due to the warning, but some experience minor data loss.
+Explanation: Informed consent mitigates some blame, but releasing known risky software still causes harm.
+Long-Term: The team spends months doing damage control and tech support for Beta users.
+Explanation: The technical debt incurred by a premature release drains resources long after the initial launch.

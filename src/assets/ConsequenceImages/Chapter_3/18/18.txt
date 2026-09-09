@@ -1,0 +1,23 @@
+Scenario 18: Code Ownership Dispute
+A developer creates a lucrative side-project app, but used a company laptop during lunch breaks to code part of it.
+Decision A (Ethical): Disclose this to the employer and negotiate a royalty or ownership split.
+Immediate: The developer loses full ownership of the app.
+Explanation: Acknowledging the use of company resources requires surrendering a portion of intellectual equity.
+Ripple: The company provides marketing resources to push the app.
+Explanation: A negotiated partnership turns a legal vulnerability into a mutually beneficial corporate sponsorship.
+Long-Term: The app succeeds massively, and both parties profit legally and fairly.
+Explanation: Transparency ensures the developer reaps financial rewards without the looming threat of an ownership lawsuit.
+Decision B (Unethical): Hide the fact and claim 100% ownership.
+Immediate: The developer gets all early profits.
+Explanation: Secrecy allows the developer to temporarily hoard all financial gains from the app.
+Ripple: The company's IT audit discovers the source code on the laptop.
+Explanation: Corporate IT policies routinely scan devices, making it impossible to hide side-projects built on company hardware.
+Long-Term: The company sues, winning 100% of the IP rights, and the developer gets nothing.
+Explanation: Legally, work done on company equipment usually belongs entirely to the employer, resulting in total loss for the developer.
+Decision C (Mixed): Delete the code from the laptop and rewrite those specific modules at home.
+Immediate: The developer loses weeks of progress.
+Explanation: The developer attempts to "clean" their tracks by destroying the tainted code and doing double the work.
+Ripple: The final product is slightly different and delayed.
+Explanation: The rewrite causes setbacks but technically removes the company's hardware from the equation.
+Long-Term: The developer keeps ownership but constantly fears a code-similarity audit.
+Explanation: Even after a rewrite, the developer lives with anxiety that the logic was conceived on company time.

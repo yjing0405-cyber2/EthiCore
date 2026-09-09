@@ -1,0 +1,23 @@
+Scenario 30: The Problem of Fair Pricing
+An IT repair shop receives a laptop with a disconnected hard drive cable. The owner is an elderly person who knows nothing about computers.
+Decision A (Ethical): Reconnect the cable and charge a nominal, transparent diagnostic fee.
+Immediate: The shop makes a small $20 profit.
+Explanation: Ethical pricing charges only for the actual labor performed, ignoring the customer's ignorance.
+Ripple: The elderly customer is extremely grateful and tells their family.
+Explanation: Honesty builds immense goodwill, turning a minor repair into a powerful word-of-mouth marketing event.
+Long-Term: The shop gains dozens of loyal, long-term customers through trust.
+Explanation: Treating vulnerable customers fairly is the foundation of a highly respected, community-staple business.
+Decision B (Unethical): Lie, say the motherboard is fried, and charge $500 for a "replacement."
+Immediate: The shop makes a massive, easy profit.
+Explanation: The technician ruthlessly preys on the customer's technical illiteracy to commit outright theft.
+Ripple: The elderly customer struggles financially to pay the bill.
+Explanation: Overcharging causes genuine financial harm to individuals living on fixed incomes.
+Long-Term: The customer's tech-savvy grandson discovers the fraud and destroys the shop's reputation online.
+Explanation: Predatory behavior is eventually exposed by knowledgeable third parties, destroying the shop's business.
+Decision C (Mixed): Reconnect the cable but charge for a full "system optimization package" they didn't need.
+Immediate: The shop makes $100 instead of $20.
+Explanation: The shop avoids outright lying about the broken part but forcefully up-sells unnecessary services.
+Ripple: The computer works, but the customer paid more than necessary.
+Explanation: The customer gets a working laptop but is subtly exploited due to their lack of knowledge.
+Long-Term: The shop becomes known for overcharging, driving away budget-conscious customers.
+Explanation: A pattern of pushing unnecessary services creates a reputation for "nickel-and-diming" customers.

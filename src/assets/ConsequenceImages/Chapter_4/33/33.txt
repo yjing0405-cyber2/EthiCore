@@ -1,0 +1,23 @@
+Scenario 33: The Morality of Labor Strikes
+The IT department of a major hospital decides to strike for better pay, threatening to shut down critical patient life-support networks.
+Decision A (Ethical): Strike, but maintain a skeleton crew to keep life-saving networks operational.
+Immediate: The strike impact is felt administratively, but patients remain safe.
+Explanation: Ethical striking in critical sectors requires balancing labor rights with the fundamental right to life.
+Ripple: The public supports the IT workers' reasonable demands.
+Explanation: Ensuring patient safety guarantees that public opinion remains sympathetic to the workers' cause.
+Long-Term: The hospital administration negotiates a fair wage increase without any loss of life.
+Explanation: A measured strike achieves the financial goals without crossing the line into endangering the public.
+Decision B (Unethical): Shut down everything completely to force immediate compliance.
+Immediate: Hospital operations descend into absolute chaos.
+Explanation: Weaponizing human life to win a labor dispute is the ultimate violation of professional ethics.
+Ripple: Several patients die due to medical record inaccessibility and network failures.
+Explanation: Shutting down hospital IT directly disrupts life-saving treatments and emergency responses.
+Long-Term: The striking workers are arrested for manslaughter, and IT unions face severe government crackdowns.
+Explanation: Causing deaths during a strike strips the workers of legal protections and results in severe criminal charges.
+Decision C (Mixed): Shut down non-critical systems (billing) but leave medical systems vulnerable without active monitoring.
+Immediate: The hospital loses revenue daily.
+Explanation: Targeting the financial systems hurts the administration without directly unplugging medical devices.
+Ripple: A minor glitch in the medical system goes unnoticed.
+Explanation: By abandoning monitoring duties, the IT staff allows easily fixable errors to escalate into dangerous problems.
+Long-Term: Patient care degrades slowly, leading to lawsuits against both the hospital and the IT union.
+Explanation: The negligence resulting from the partial strike still harms patients, leading to shared liability.

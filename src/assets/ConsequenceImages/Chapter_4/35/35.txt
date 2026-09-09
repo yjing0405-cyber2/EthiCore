@@ -1,0 +1,23 @@
+Scenario 35: Toxic Waste Disposal (Corporate Responsibility)
+A tech manufacturing firm saves money by illegally dumping toxic e-waste (batteries, heavy metals) into a local river instead of recycling it.
+Decision A (Ethical): The IT Operations Manager whistleblows to the Department of Environment and Natural Resources (DENR).
+Immediate: The firm is raided and operations halt.
+Explanation: Government intervention immediately stops the active destruction of the environment.
+Ripple: The river ecosystem begins to slowly recover.
+Explanation: Halting the toxic dumping allows nature the opportunity to eventually cleanse itself.
+Long-Term: The company is fined heavily and forced to build an ethical recycling plant, saving the town's water supply.
+Explanation: Exposing environmental crimes forces corporations to adopt sustainable, legally compliant operations.
+Decision B (Unethical): The manager ignores it and collects their annual cost-saving bonus.
+Immediate: The company posts record profits.
+Explanation: The company achieves immense short-term financial success by externalizing its disposal costs onto the environment.
+Ripple: Local residents develop severe health issues from contaminated water.
+Explanation: E-waste introduces highly toxic heavy metals into the water supply, directly poisoning the community.
+Long-Term: An investigative journalist exposes the dumping; executives face prison time and massive class-action lawsuits.
+Explanation: Environmental atrocities are eventually uncovered, leading to the utter destruction of the corporate entity and criminal prosecution.
+Decision C (Mixed): The manager quietly shifts future disposal to legal recyclers but doesn't report the past dumping.
+Immediate: The active pollution stops.
+Explanation: The manager fixes the process moving forward but engages in a cover-up regarding past crimes.
+Ripple: The river remains contaminated from past waste.
+Explanation: Because the authorities aren't notified, no clean-up efforts are initiated to remove the existing toxins.
+Long-Term: The company avoids immediate prosecution, but the town's health issues persist unexplained.
+Explanation: The cover-up protects the company legally, but the local population continues to suffer from the hidden ecological damage.

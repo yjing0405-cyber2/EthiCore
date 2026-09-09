@@ -1,0 +1,23 @@
+Scenario 13: Ignoring a Subpoena
+An IT director receives a valid court subpoena for user logs related to a criminal investigation but the CEO says to ignore it.
+Decision A (Ethical): Comply with the subpoena and hand over the logs.
+Immediate: The CEO is furious.
+Explanation: Complying with law enforcement often puts IT leadership in direct conflict with self-protecting executives.
+Ripple: The authorities use the logs to catch a dangerous cybercriminal.
+Explanation: IT logs are critical pieces of digital forensics necessary for the justice system to function.
+Long-Term: The IT director is protected by law, and the company is seen as cooperative.
+Explanation: Upholding legal obligations protects the individual professional and keeps the company clear of obstruction charges.
+Decision B (Unethical): Delete the logs and claim a system error.
+Immediate: The CEO is pleased.
+Explanation: The IT director commits spoliation of evidence to appease corrupt upper management.
+Ripple: Investigators find digital forensics proving the intentional deletion.
+Explanation: Deleting data leaves traces; forensic experts can easily differentiate a system error from deliberate wiping.
+Long-Term: The IT director is jailed for obstruction of justice.
+Explanation: Following illegal orders from a CEO does not shield an IT professional from severe criminal penalties.
+Decision C (Mixed): Hand over heavily redacted logs.
+Immediate: Authorities are frustrated by the lack of useful data.
+Explanation: The IT director attempts malicious compliance, legally submitting a document stripped of value.
+Ripple: A judge orders the unredacted logs to be surrendered under threat of contempt.
+Explanation: The legal system does not tolerate gamesmanship regarding subpoenaed digital evidence.
+Long-Term: The company wastes time and money on legal fees before inevitably complying.
+Explanation: Trying to skirt legal obligations only delays the inevitable and angers the judiciary.

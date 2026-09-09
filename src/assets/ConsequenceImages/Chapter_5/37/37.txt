@@ -1,0 +1,24 @@
+Scenario 37: Weak Encryption for Cost Savings
+An IT architect is told to use outdated, easily crackable encryption for a medical database to save server processing costs.
+Decision A (Ethical): Mandate strong AES-256 encryption, arguing the cost of a breach far outweighs server costs.
+Immediate: The company must upgrade its server infrastructure.
+Explanation: Proper security requires upfront financial investment in capable hardware.
+Ripple: Patient medical records are highly secure.
+Explanation: Strong cryptography successfully renders the database unreadable to unauthorized external actors.
+Long-Term: The company easily passes health data compliance audits and avoids catastrophic breaches.
+Explanation: Prioritizing data protection ensures the long-term viability of the company in the highly regulated healthcare sector.
+Decision B (Unethical): Use weak encryption as ordered.
+Immediate: Server costs stay low; the architect gets a bonus.
+Explanation: Sacrificing security for cost-cutting earns immediate praise from financially focused, non-technical executives.
+Ripple: A script-kiddie hacker easily cracks the database.
+Explanation: Outdated encryption algorithms are easily broken by even amateur attackers using widely available tools.
+Long-Term: Millions of medical records are sold online, and the architect's career is ruined by the negligence.
+Explanation: Failing to implement industry-standard cryptography for sensitive health data is a career-ending professional failure.
+Decision C (Mixed): Use strong encryption for passwords but weak encryption for the actual medical files.
+Immediate: Server load is manageable, and passwords are safe.
+Explanation: This attempts a compromise, securing the gates while leaving the actual treasure poorly defended.
+Ripple: Hackers bypass the login and steal the weakly encrypted files directly.
+Explanation: Attackers always target the weakest link; if the data itself is poorly encrypted, the password strength is irrelevant.
+Long-Term: The company faces severe DPA fines for failing to adequately protect sensitive personal information.  
+DOCX
+Explanation: Regulatory bodies penalize companies based on the protection of the data itself, not just the access controls.

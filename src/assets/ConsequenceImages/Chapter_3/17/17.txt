@@ -1,0 +1,23 @@
+Scenario 17: Plagiarizing UI Design
+A web developer is told to perfectly clone the UI/UX of a highly successful rival app.
+Decision A (Ethical): Refuse the exact clone; create an original design inspired by the rival.
+Immediate: The boss is annoyed by the design divergence.
+Explanation: Choosing originality over cheap imitation often conflicts with management's desire for guaranteed success.
+Ripple: Users appreciate the fresh but familiar take.
+Explanation: Drawing inspiration while adding unique value is respected by users and avoids legal claims.
+Long-Term: The app builds its own brand identity and avoids trade dress lawsuits.
+Explanation: Original UI/UX development establishes a unique market presence and protects against "look and feel" copyright claims.
+Decision B (Unethical): Clone the app pixel-for-pixel.
+Immediate: The boss is thrilled, and development is fast.
+Explanation: Plagiarism eliminates the costly design phase, providing a fast route to market.
+Ripple: Users accuse the app of being a cheap knock-off.
+Explanation: The tech-savvy public quickly identifies and shames blatant digital counterfeits.
+Long-Term: The app is removed from app stores due to copyright infringement takedowns.
+Explanation: Platform holders aggressively enforce DMCA and copyright takedowns against pixel-perfect clones.
+Decision C (Mixed): Clone the layout but change all the colors and fonts.
+Immediate: The app avoids immediate automated takedowns.
+Explanation: Superficial changes help the app bypass basic automated copyright detection algorithms.
+Ripple: The rival company sends a cease-and-desist letter.
+Explanation: Competitors will still legally challenge apps that copy their core structural wireframes and user flow.
+Long-Term: The company spends a fortune on legal fees defending their "unique" design.
+Explanation: Operating in the gray area of UI design leads to protracted and expensive legal attrition.

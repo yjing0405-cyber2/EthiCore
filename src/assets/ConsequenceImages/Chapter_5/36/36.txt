@@ -1,0 +1,23 @@
+Scenario 36: Webcam Tracking of Remote Workers
+A company installs spyware on employee laptops that randomly takes webcam photos to ensure they are at their desks.
+Decision A (Ethical): Refuse to install it and advocate for output-based performance metrics.
+Immediate: Management pushes back, demanding surveillance.
+Explanation: Pushing back against dystopian surveillance often angers micromanagers who demand total control.
+Ripple: The IT team explains the massive legal risks of capturing employees in private settings.
+Explanation: Highlighting the legal liabilities of recording people in their homes often shifts management's perspective.
+Long-Term: The company adopts output-based metrics, leading to happier, more productive employees.
+Explanation: Trusting employees and measuring actual work results in a much healthier and more efficient corporate culture.
+Decision B (Unethical): Install the spyware secretly without employee knowledge.
+Immediate: Management gets their surveillance photos.
+Explanation: Secret deployment fulfills management's desire for control through a massive violation of privacy.
+Ripple: The spyware accidentally captures an employee changing clothes.
+Explanation: Unregulated webcams in private homes inevitably capture highly sensitive, non-consensual imagery.
+Long-Term: The employee discovers it and sues the company for severe invasion of privacy, bankrupting the firm.
+Explanation: Surreptitious visual surveillance of employees in their homes is a catastrophic legal violation that destroys companies.
+Decision C (Mixed): Install it, but require employees to sign a consent form or face termination.
+Immediate: Employees reluctantly sign the form out of fear.
+Explanation: Consent gained through the threat of firing is legally dubious and ethically bankrupt.
+Ripple: Morale plummets, and top talent leaves for companies that respect privacy.
+Explanation: Highly skilled workers refuse to tolerate invasive surveillance and will simply find better employers.
+Long-Term: The company struggles to hire competent staff and gains a reputation as a dystopian workplace.
+Explanation: Normalizing extreme surveillance severely damages the employer brand, leaving only desperate or low-quality staff.

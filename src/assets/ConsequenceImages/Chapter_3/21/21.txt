@@ -1,0 +1,23 @@
+Scenario 21: Pirated Tools in Outsourcing
+A project manager discovers their offshore development team is using pirated IDEs to write the client's code.
+Decision A (Ethical): Demand they use legal licenses or switch them to free, open-source IDEs.
+Immediate: Development pauses while licenses are procured.
+Explanation: Enforcing copyright compliance across borders causes short-term logistical delays.
+Ripple: The code is generated in a legally clean environment.
+Explanation: Ensuring legal toolchains prevents intellectual property contagion from affecting the final product.
+Long-Term: The client is protected from potential IP contagion.
+Explanation: The project manager fulfills their fiduciary duty to deliver software free of legal defects.
+Decision B (Unethical): Ignore it since it's the offshore team's problem.
+Immediate: Development continues at a fast pace.
+Explanation: The manager willfully turns a blind eye to software piracy to maintain project velocity.
+Ripple: The pirated IDE injects malicious code snippets into the project.
+Explanation: Compromised development tools silently embed vulnerabilities into the source code being written.
+Long-Term: The client's application acts as a botnet, destroying the project manager's career.
+Explanation: Negligence in overseeing the software supply chain results in disastrous cyber-attacks on the client.
+Decision C (Mixed): Buy licenses only for the lead developers and let the juniors use pirated ones.
+Immediate: Costs are kept low, but risk remains.
+Explanation: The manager attempts a half-measure, mitigating some legal risk while still tolerating piracy.
+Ripple: Team collaboration becomes difficult due to version mismatches.
+Explanation: Mixing official and cracked software versions creates unstable development environments and merge conflicts.
+Long-Term: An IP audit reveals the mixed environment, jeopardizing the client contract.
+Explanation: Partial compliance is eventually exposed, breaching the trust and legal stipulations of the client agreement.

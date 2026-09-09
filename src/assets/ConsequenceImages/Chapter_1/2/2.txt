@@ -1,0 +1,23 @@
+Scenario 2: Using Company Resources for Freelancing
+An IT specialist uses their high-end company workstation to complete heavy rendering for personal freelance clients after hours.
+Decision A (Ethical): Stop using company resources and buy a personal workstation.
+Immediate: Freelance profits temporarily dip to pay for the new machine.
+Explanation: Acting ethically often requires personal financial investment to separate professional and private ventures.
+Ripple: The specialist learns to manage their own hardware and software licenses.
+Explanation: This fosters true professional independence and respect for intellectual property rights.
+Long-Term: The specialist builds a legitimate side business without risking their primary job.
+Explanation: Maintaining clear boundaries ensures long-term career stability and avoids conflicts of interest.
+Decision B (Unethical): Continue using the company machine secretly.
+Immediate: The specialist maximizes their personal profit.
+Explanation: The individual improperly benefits from the employer's overhead and equipment costs.
+Ripple: Network admins notice unusual data bandwidth and CPU usage spikes.
+Explanation: Unauthorized use of IT resources rarely goes unnoticed in properly monitored environments.
+Long-Term: The specialist is caught, terminated for violating company policy, and sued for resource theft.
+Explanation: Misappropriation of corporate assets leads to severe disciplinary and legal consequences.
+Decision C (Mixed): Ask the manager for permission to use the PC for non-competitor work.
+Immediate: The manager allows it but charges a small rental fee.
+Explanation: Transparency allows for compromise, but the company must still protect its asset investments.
+Ripple: Other employees start asking for the same privilege, complicating policies.
+Explanation: Exceptions to resource policies can create administrative burdens and perceptions of favoritism.
+Long-Term: The company creates a formal equipment-use policy, but the specialist's freelance income is reduced by the fees.
+Explanation: The situation forces the company to formalize gray areas, balancing employee perks with corporate protection.

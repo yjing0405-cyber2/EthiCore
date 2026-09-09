@@ -1,0 +1,23 @@
+Scenario 34: Whistleblowing
+An accountant and an IT auditor discover the CFO is using custom software to embezzle millions from the company.
+Decision A (Ethical): Whistleblow to the board of directors and the authorities with full digital evidence.
+Immediate: The CFO is suspended pending investigation.
+Explanation: Whistleblowing triggers immediate corporate and legal mechanisms to halt the ongoing crime.
+Ripple: The company's stock temporarily dips due to the scandal.
+Explanation: Exposing corruption causes short-term market panic but is necessary to save the organization.
+Long-Term: The CFO is jailed, the funds are recovered, and the auditor is promoted for saving the company.
+Explanation: Doing the right thing removes the cancer from leadership, securing the company's financial future.
+Decision B (Unethical): Blackmail the CFO for a cut of the embezzled money to keep quiet.
+Immediate: The auditor receives a massive payoff.
+Explanation: The auditor transitions from a passive observer to an active accomplice in the financial crime.
+Ripple: The embezzlement drains the company's operating budget.
+Explanation: The accelerated theft required to pay the blackmailer quickly pushes the company toward insolvency.
+Long-Term: The company collapses, thousands lose their jobs, and the auditor is arrested as an accomplice.
+Explanation: Blackmailers are legally treated as co-conspirators and face the same severe prison sentences as the primary thief.
+Decision C (Mixed): Resign immediately to avoid involvement without reporting the crime.
+Immediate: The auditor escapes immediate danger.
+Explanation: Fleeing protects the auditor from direct retaliation but ignores their professional duty to report fraud.
+Ripple: The CFO continues to steal unabated.
+Explanation: Because the whistle wasn't blown, the perpetrator is free to continue destroying the company.
+Long-Term: The company eventually goes bankrupt, and the auditor feels lingering guilt for doing nothing.
+Explanation: While legally safer, the auditor must live with the knowledge that their silence cost thousands of people their livelihoods.

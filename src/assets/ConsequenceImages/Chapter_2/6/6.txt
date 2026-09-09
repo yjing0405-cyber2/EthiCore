@@ -1,0 +1,23 @@
+Scenario 6: Refusing an ACM Code Violation
+A software engineer is asked to write code that secretly throttles competitors' websites, violating ACM codes.
+Decision A (Ethical): Refuse to write the code and cite ACM principles.
+Immediate: The engineer is threatened with termination.
+Explanation: Adhering to professional codes like the ACM often puts individuals at odds with unethical corporate directives.
+Ripple: The engineer resigns and reports the company to a tech watchdog.
+Explanation: Ethical professionals have a duty to not only refuse harmful work but to expose malicious corporate practices.
+Long-Term: The company faces public backlash and sanctions, while the engineer finds a better job.
+Explanation: Upholding ethical codes preserves the engineer's reputation, while the company faces the consequences of market manipulation.
+Decision B (Unethical): Write the code for a bonus.
+Immediate: The engineer receives the bonus.
+Explanation: Financial incentives are frequently used to corrupt IT professionals into executing malicious actions.
+Ripple: Competitors experience slowdowns and investigate the cause.
+Explanation: Malicious network activities leave traces that competent technical adversaries will eventually uncover.
+Long-Term: The engineer loses their professional credentials and faces potential legal action.
+Explanation: Violating fundamental ethical codes permanently destroys a developer's professional standing and legal safety.
+Decision C (Mixed): Write the code but add a backdoor to disable it later.
+Immediate: The engineer keeps their job.
+Explanation: This is an attempt to compromise, trying to satisfy the boss while planning an emergency exit strategy.
+Ripple: The throttling causes chaos, and the engineer panics and triggers the backdoor.
+Explanation: The developer loses control of the ethical compromise, leading to unpredictable system behavior.
+Long-Term: The company discovers the backdoor, firing the engineer for insubordination.
+Explanation: Trying to play both sides results in losing the trust of the employer without actually upholding ethical standards.

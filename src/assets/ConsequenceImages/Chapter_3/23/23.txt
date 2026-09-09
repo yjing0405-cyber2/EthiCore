@@ -1,0 +1,23 @@
+Scenario 23: Freelancing for a Competitor
+A database administrator (DBA) is offered a weekend consulting gig to optimize a direct competitor's database.
+Decision A (Ethical): Decline the offer due to a clear conflict of interest.
+Immediate: The DBA misses out on extra income.
+Explanation: Upholding corporate loyalty requires turning down lucrative opportunities that aid direct competitors.
+Ripple: The DBA maintains their loyalty and focus on their primary job.
+Explanation: Rejecting the offer prevents any accidental spillage of proprietary optimization strategies.
+Long-Term: The DBA is trusted with highly sensitive company secrets and promoted.
+Explanation: Proven loyalty makes the DBA an indispensable and trusted asset to their primary employer.
+Decision B (Unethical): Take the gig and use primary company's proprietary optimization scripts.
+Immediate: The DBA finishes the gig quickly and gets paid.
+Explanation: The DBA commits corporate espionage by weaponizing their employer's intellectual property for a rival.
+Ripple: The competitor's database performance matches the DBA's primary company.
+Explanation: The rival company unfairly gains the technological edge developed by the DBA's primary employer.
+Long-Term: The primary company discovers the code transfer and sues the DBA for corporate espionage.
+Explanation: Stealing trade secrets leads to severe civil litigation and the total destruction of the DBA's career.
+Decision C (Mixed): Take the gig but only offer generic, non-proprietary advice.
+Immediate: The DBA gets paid a smaller consulting fee.
+Explanation: The DBA attempts to walk a fine line, working for the enemy without technically giving away secrets.
+Ripple: The competitor is underwhelmed by the generic advice.
+Explanation: Because they withheld the "secret sauce," the DBA delivers a mediocre service to the client.
+Long-Term: The primary employer finds out and fires the DBA for violating the non-compete clause.
+Explanation: Even generic help to a rival is a breach of contract that justifies immediate termination.

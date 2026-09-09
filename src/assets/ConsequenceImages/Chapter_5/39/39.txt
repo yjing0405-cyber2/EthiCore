@@ -1,0 +1,23 @@
+Scenario 39: "White-Hat" Hacking a Competitor
+A cybersecurity student decides to test their skills by hacking into a local bank's system without permission, intending to report the flaws
+Decision A (Ethical): Do not hack the bank; instead, use legal bug bounty platforms.
+Immediate: The student practices legally and safely.
+Explanation: Authorized platforms provide realistic environments to test skills without breaking the law.
+Ripple: The student earns legitimate bounties and recognition.
+Explanation: Legal hacking provides financial rewards and verifiable experience for a resume.
+Long-Term: The student is hired by a top cybersecurity firm based on their legal track record.
+Explanation: Staying within ethical boundaries guarantees a bright, unhindered future in the cybersecurity industry.
+Decision B (Unethical): Hack the bank, download customer data as "proof," and demand a job.
+Immediate: The bank's intrusion detection system flags the breach.
+Explanation: Hacking a bank triggers massive, immediate alarms from enterprise-grade security systems.
+Ripple: The bank calls the NBI instead of hiring the student.
+Explanation: Corporations do not hire criminals who extort them; they call federal law enforcement.
+Long-Term: The student is arrested for cybercrime and banned from working in the IT sector.
+Explanation: Unauthorized access and data exfiltration, regardless of intent, is a severe felony that ruins careers.
+Decision C (Mixed): Scan the bank's public-facing ports, find a flaw, and anonymously email them without exploiting it.
+Immediate: The bank receives the tip and patches the flaw.
+Explanation: The student provides helpful information without technically crossing the line into active exploitation.
+Ripple: The bank's security team tries to track the anonymous sender.
+Explanation: Unsolicited security tips are often treated as hostile reconnaissance by corporate security teams.
+Long-Term: The student remains uncredited and paranoid about being tracked down by authorities.
+Explanation: Operating in the shadows denies the student any professional credit and causes constant legal anxiety.

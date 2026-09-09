@@ -1,0 +1,23 @@
+Scenario 5: Taking Credit for Junior's Code
+A senior developer presents an innovative algorithm written by an intern as their own to management.
+Decision A (Ethical): Immediately credit the intern during the presentation.
+Immediate: The intern receives praise from management.
+Explanation: Honest attribution immediately validates the hard work of junior staff.
+Ripple: The intern is highly motivated and hired full-time.
+Explanation: Recognizing talent fosters loyalty and encourages further innovation from new employees.
+Long-Term: The senior developer is respected as a great mentor and leader.
+Explanation: True professional leadership is built on lifting up team members, not stealing their accomplishments.
+Decision B (Unethical): Accept the praise and take full credit.
+Immediate: The senior developer gets a raise.
+Explanation: Plagiarism can yield immediate financial or reputational rewards if undetected.
+Ripple: The intern discovers the theft and quits in frustration.
+Explanation: Intellectual theft destroys trust and drives valuable talent away from the organization.
+Long-Term: The senior developer cannot maintain the complex code, leading to system failures and their eventual termination.
+Explanation: Claiming credit for code you don't understand inevitably leads to technical failure when maintenance is required.
+Decision C (Mixed): Share the credit vaguely ("My team and I built this").
+Immediate: The senior developer still gets the majority of the praise.
+Explanation: Obfuscating exact contributions allows the senior dev to technically avoid lying while still absorbing undue credit.
+Ripple: The intern feels undervalued but stays quiet.
+Explanation: Partial credit breeds resentment and stifles the junior employee's motivation to innovate.
+Long-Term: The intern leaves for a competitor, taking their innovative ideas with them.
+Explanation: Failing to properly champion junior talent ultimately benefits competitor organizations.

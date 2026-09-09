@@ -1,0 +1,23 @@
+Scenario 22: Conflict of Interest (Hiring a Relative)
+An IT procurement officer must select a new cybersecurity vendor. Their brother owns one of the bidding firms.
+Decision A (Ethical): Disclose the relationship and recuse themselves from the voting process.
+Immediate: Another officer takes over the selection.
+Explanation: Recusal is the only definitive way to eliminate bias and maintain the integrity of the bidding process.
+Ripple: The vendor selection is fair and unbiased.
+Explanation: Removing conflicts of interest ensures the company gets the best security product based solely on merit.
+Long-Term: The officer's integrity is recognized, paving the way for future promotions.
+Explanation: Demonstrating high ethical standards in procurement builds deep institutional trust.
+Decision B (Unethical): Secretly steer the contract to the brother's firm for a kickback.
+Immediate: The brother's firm wins, and the officer gets paid.
+Explanation: The officer commits outright fraud and nepotism for personal financial enrichment.
+Ripple: The brother's firm provides subpar cybersecurity services.
+Explanation: Vendors chosen through corruption rather than competence inevitably deliver inferior technical protection.
+Long-Term: The company is breached, the nepotism is discovered, and both face fraud charges.
+Explanation: The resulting security failure triggers an investigation that exposes the illegal procurement scheme.
+Decision C (Mixed): Disclose the relationship but insist on remaining on the voting panel.
+Immediate: The committee is uncomfortable but allows it.
+Explanation: Disclosure without recusal still allows the conflict of interest to actively poison the decision-making dynamic.
+Ripple: The brother's firm wins legitimately on merit.
+Explanation: Even if the firm is the best choice, the officer's presence on the panel casts doubt on the result.
+Long-Term: Other employees still suspect favoritism, damaging workplace morale.
+Explanation: The perception of impropriety is often just as damaging to corporate culture as actual corruption.

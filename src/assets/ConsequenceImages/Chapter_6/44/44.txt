@@ -1,0 +1,23 @@
+Scenario 44: Reverse-Engineering a Competitor
+A game developer decompiles a rival's hit game to steal their proprietary physics engine code.
+Decision A (Ethical): Study the rival's game visually and mathematically build a new physics engine from scratch.
+Immediate: The developer spends months on intense math and coding.
+Explanation: Ethical software creation demands immense technical effort to replicate functionality without stealing code.
+Ripple: The new engine has its own unique feel and quirks.
+Explanation: Because it was built independently, the resulting software has an original identity.
+Long-Term: The developer patents their own engine, creating a new revenue stream.
+Explanation: Hard work results in novel Intellectual Property that the developer can legally own and license to others.
+Decision B (Unethical): Steal the decompiled code and use it in their own game.
+Immediate: The developer's game features perfect physics instantly.
+Explanation: The theft allows the developer to bypass years of R&D and immediately implement a polished feature.
+Ripple: The rival spots distinct glitches unique to their engine in the developer's game.
+Explanation: Complex software engines have highly specific bugs that act as unintentional watermarks for stolen code.
+Long-Term: The developer's game is banned from all platforms for IP theft.
+Explanation: Digital storefronts will permanently ban developers found guilty of injecting stolen code into their products.
+Decision C (Mixed): Decompile it just to "learn," but end up copying core logic structures.
+Immediate: The developer rationalizes their theft as "inspiration."
+Explanation: The developer tricks themselves into believing that reverse engineering for educational purposes justifies copying logic.
+Ripple: The resulting engine is a legal patchwork of original and stolen code.
+Explanation: The codebase becomes a toxic liability, entangled with the intellectual property of a direct competitor.
+Long-Term: The developer lives in constant fear of an IP audit during publisher negotiations.
+Explanation: The tainted code makes the game incredibly difficult to sell to publishers who demand clean IP rights.

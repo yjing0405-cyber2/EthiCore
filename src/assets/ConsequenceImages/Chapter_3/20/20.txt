@@ -1,0 +1,24 @@
+Scenario 20: Software Cracking
+An IT admin uses a crack to extend the trial of expensive server monitoring software indefinitely to save department budget.
+Decision A (Ethical): Request budget for the software or find a Free Open-Source Software (FOSS) alternative.
+Immediate: The admin spends hours configuring a new FOSS solution.
+Explanation: Choosing ethical, free alternatives often requires a significant investment of time and technical labor.
+Ripple: The department stays within budget legally.
+Explanation: Utilizing open-source tools provides robust capabilities without violating commercial copyright laws.
+Long-Term: The FOSS solution becomes the company standard, saving thousands over the years.
+Explanation: Ethical resourcefulness leads to sustainable, long-term operational efficiency.
+Decision B (Unethical): Use the crack on the live server.
+Immediate: The software works for free.
+Explanation: Cracking provides the illusion of obtaining enterprise-grade tools at zero cost.
+Ripple: The crack introduces a backdoor trojan into the server.
+Explanation: Pirated software patches are almost always bundled with malicious payloads designed to compromise networks.
+Long-Term: The server is compromised, data is stolen, and the admin faces criminal charges.
+Explanation: Using cracked software on corporate infrastructure is a catastrophic security failure that guarantees professional ruin.
+Decision C (Mixed): Use the crack temporarily just until the new budget year starts in two months.
+Immediate: The monitoring continues uninterrupted.
+Explanation: The admin rationalizes software piracy as a temporary stopgap measure.
+Ripple: The software vendor detects the unauthorized pingback.
+Explanation: Enterprise software continually "phones home," making cracked versions easy for vendors to detect.
+Long-Term: The company is audited, fined heavily, and forced to buy licenses at a premium.
+Explanation: Temporary piracy is still piracy, resulting in vendor audits and punitive licensing fees.
+ 

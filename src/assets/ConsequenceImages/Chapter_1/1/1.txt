@@ -1,0 +1,23 @@
+Scenario 1: The Known Bug Before Launch
+A lead developer discovers a critical security bug a day before the app's launch. Fixing it will delay the launch by two weeks.
+Decision A (Ethical): Report the bug and delay the launch.
+Immediate: Management is frustrated by the delay.
+Explanation: Prioritizing security often causes short-term friction with business stakeholders who are focused on timelines.
+Ripple: The QA team audits the entire system more thoroughly, finding minor issues.
+Explanation: Pausing the release sets a precedent, encouraging a broader culture of quality assurance and vigilance within the team.
+Long-Term: The app launches securely, building strong user trust and preventing costly breaches.
+Explanation: Ethical diligence ultimately protects the company's reputation and bottom line from catastrophic cyber incidents.
+Decision B (Unethical): Ignore the bug to meet the deadline.
+Immediate: The app launches on time, and the team gets a bonus.
+Explanation: Unethical choices often yield immediate, superficial rewards that mask underlying dangers.
+Ripple: Hackers exploit the bug, exposing user data.
+Explanation: Ignoring known vulnerabilities inevitably leads to exploitation, violating the professional responsibility to protect users.
+Long-Term: The company faces massive lawsuits, and the developer is fired and blacklisted.
+Explanation: The long-term fallout of professional negligence destroys careers and bankrupts organizations.
+Decision C (Mixed): Launch on time but silently patch it on the live server.
+Immediate: The app launches, but the servers experience severe downtime during the live patch.
+Explanation: Attempting to hide mistakes while fixing them on the fly creates operational instability.
+Ripple: Users complain about instability, though no data is stolen.
+Explanation: While a data breach is avoided, user experience suffers due to a lack of proper testing protocols.
+Long-Term: The developer faces disciplinary action for unauthorized live changes, though the company avoids a breach.
+Explanation: Bypassing standard deployment procedures undermines professional trust, even if the intent was corrective.

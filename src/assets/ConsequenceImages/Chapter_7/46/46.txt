@@ -1,0 +1,23 @@
+Scenario 46: Notifying the NBI of a Cyberattack
+A company experiences a massive ransomware attack. The CEO wants to pay the ransom quietly, but the CISO wants to involve the National Bureau of Investigation (NBI).  
+Decision A (Ethical): Call the NBI Cybercrime Division immediately.
+Immediate: The NBI steps in to investigate and secure the network.
+Explanation: Involving federal authorities brings in top-tier forensic experts to contain the immediate threat.
+Ripple: The company refuses to fund criminal syndicates.
+Explanation: Not paying the ransom starves cybercriminals of the funds they need to launch future attacks.
+Long-Term: The NBI recovers the decryption keys, and the company restores data without paying millions.
+Explanation: Cooperation with law enforcement often leads to the safe recovery of data as syndicates are dismantled globally.
+Decision B (Unethical): Pay the ransom quietly and hide the attack.
+Immediate: The company loses millions of dollars to criminals.
+Explanation: Paying ransoms directly funds terrorism and organized crime while depleting corporate assets.
+Ripple: The criminals mark the company as an "easy target."
+Explanation: Paying a ransom puts a massive target on the company's back for future, more aggressive attacks.
+Long-Term: The company is attacked again six months later, eventually going bankrupt.
+Explanation: Yielding to extortion creates a cycle of victimization that inevitably destroys the organization entirely.
+Decision C (Mixed): Hire a private negotiator to pay the ransom and only report it to the NBI months later.
+Immediate: Data is restored, but the trail goes cold.
+Explanation: The company prioritized its data over justice, allowing the criminals to escape with the money.
+Ripple: The NBI is frustrated by the delayed report and destroyed evidence.
+Explanation: Late reporting makes it mathematically impossible for authorities to track the perpetrators or the stolen funds.
+Long-Term: The company avoids immediate disaster but faces regulatory fines for delayed breach reporting.
+Explanation: While the business survives, it is punished by regulators for failing to report the cybercrime in a timely manner.
