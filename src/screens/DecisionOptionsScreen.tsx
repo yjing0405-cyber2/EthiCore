@@ -5,10 +5,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { buildScenarioDecisions } from '../data/scenarioDatabase';
 
-type VerdictType = 'ethical' | 'mixed' | 'unethical';
 const TOTAL_STEPS = 4;
 const CURRENT_STEP = 2;
-
 const chapterAccentMap = {
   1: { surface: '#F4F9FF', border: '#0F62FF35', title: '#1D4ED8', subtitle: '#3B82F6', pillBg: '#DBEAFE', pillText: '#1D4ED8', accent: '#2563EB' },
   2: { surface: '#FFF7ED', border: '#F59E0B35', title: '#B45309', subtitle: '#D97706', pillBg: '#FDE68A', pillText: '#B45309', accent: '#F59E0B' },
@@ -19,43 +17,6 @@ const chapterAccentMap = {
   7: { surface: '#FFF1F2', border: '#EC489935', title: '#BE185D', subtitle: '#DB2777', pillBg: '#FBCFE8', pillText: '#BE185D', accent: '#EC4899' },
 };
 
-const evaluateDecision = (decision: any, scenario: any) => {
-  const textSource = [
-    decision?.title ?? '',
-    decision?.analysis ?? '',
-    decision?.immediate ?? '',
-    decision?.ripple ?? '',
-    decision?.longTerm ?? '',
-    scenario?.scenarioSetup ?? '',
-  ].join(' ').toLowerCase();
-
-  const explicitCategory = decision?.decisionCategory ?? (decision?.ethical === false ? 'unethical' : undefined);
-  const unethicalSignals = ['ignore', 'conceal', 'hide', 'secretly', 'bypass', 'exploit', 'deceive', 'fraud', 'steal', 'misuse', 'unauthorized', 'cover up', 'take full credit', 'manipulate', 'violate', 'without permission', 'harm'];
-  const ethicalSignals = ['report', 'protect', 'refuse', 'disclose', 'consult', 'responsibly', 'safely', 'credit', 'transparency', 'follow', 'document', 'seek approval', 'notify', 'warn', 'permission'];
-
-  const unethicalScore = unethicalSignals.filter((signal) => textSource.includes(signal)).length;
-  const ethicalScore = ethicalSignals.filter((signal) => textSource.includes(signal)).length;
-
-  let verdict: VerdictType = 'mixed';
-  if (explicitCategory === 'unethical' || unethicalScore > ethicalScore) verdict = 'unethical';
-  else if (explicitCategory === 'ethical' || ethicalScore > unethicalScore) verdict = 'ethical';
-
-  const corePrinciples = decision?.violatedPrinciples?.length
-    ? decision.violatedPrinciples.slice(0, 3)
-    : ['Honesty', 'Safety', 'Accountability'];
-
-  const reasoning = verdict === 'unethical'
-    ? `The system reviewed the choice against SPI principles such as ${corePrinciples.join(', ')}. Because the action favors short-term gain over responsibility, transparency, and safety, it is classified as unethical.`
-    : verdict === 'ethical'
-    ? `The system reviewed the choice against SPI principles such as ${corePrinciples.join(', ')}. The action demonstrates responsibility, transparency, and care for others, so it is classified as ethical.`
-    : `The system reviewed the choice against SPI principles such as ${corePrinciples.join(', ')}. The action has both responsible and risky elements, so it is classified as mixed.`;
-
-  return {
-    verdict,
-    label: verdict === 'unethical' ? 'Unethical' : verdict === 'ethical' ? 'Ethical' : 'Mixed',
-    reasoning,
-  };
-};
 
 const DecisionOptionsScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -81,8 +42,12 @@ const DecisionOptionsScreen: React.FC = () => {
       id: d.id ?? `d-${idx}`,
       title: d.title,
       description: d.description ?? '',
-      decisionCategory: d.decisionCategory ?? (d.ethical === false ? 'unethical' : 'ethical'),
-      ethical: d.ethical,
+      consequenceImageCategory:
+        d.decisionCategory === 'ethical' || d.decisionCategory === 'mixed' || d.decisionCategory === 'unethical'
+          ? d.decisionCategory
+          : typeof d.ethical === 'boolean'
+            ? (d.ethical ? 'ethical' : 'unethical')
+            : undefined,
       analysis: d.analysis ?? '',
       immediate: d.immediate ?? '',
       immediateExplanation: d.immediateExplanation ?? '',
@@ -121,33 +86,16 @@ const DecisionOptionsScreen: React.FC = () => {
   const circle3TranslateY = circle3Anim.interpolate({ inputRange: [0, 1], outputRange: [0, -8] });
 
   const selectedDecision = normalizedDecisions.find((decision) => decision.id === selectedDecisionId) ?? null;
-  const evaluation = useMemo(() => {
-    if (!selectedDecision) return null;
-    return evaluateDecision(selectedDecision, scenario);
-  }, [selectedDecision, scenario]);
-
-  const verdictLabel = evaluation?.label ?? 'Evaluating';
 
   const handleViewConsequences = () => {
     if (!selectedDecision) return;
 
-    const resolvedDecisionCategory =
-      selectedDecision.decisionCategory === 'ethical' ||
-      selectedDecision.decisionCategory === 'mixed' ||
-      selectedDecision.decisionCategory === 'unethical'
-        ? selectedDecision.decisionCategory
-        : evaluation?.verdict ?? selectedDecision.decisionCategory ?? 'ethical';
-
     navigation.navigate('ConsequenceTimeline', {
-      decision: {
-        ...selectedDecision,
-        decisionCategory: resolvedDecisionCategory,
-        verdict: verdictLabel,
-        aiReasoning: evaluation?.reasoning ?? '',
-      },
+      decision: selectedDecision,
       scenario,
       selectedDecisionId: selectedDecision.id,
       stage: 'Immediate',
+      chapterTitle,
     });
   };
 

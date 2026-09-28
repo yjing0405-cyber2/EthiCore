@@ -90,13 +90,6 @@ const GlassmorphismTabBar = ({ state, descriptors, navigation }: any) => {
                   }
                 };
 
-                const onLongPress = () => {
-                  navigation.emit({
-                    type: 'tabLongPress',
-                    target: route.key,
-                  });
-                };
-
                 // Icon mapping
                 let iconName = 'home-outline';
                 if (route.name === 'Home') iconName = isFocused ? 'home' : 'home-outline';
@@ -107,7 +100,16 @@ const GlassmorphismTabBar = ({ state, descriptors, navigation }: any) => {
                 else if (route.name === 'Progress') iconName = isFocused ? 'stats-chart' : 'stats-chart-outline';
 
                 return (
-                  <View key={route.key} style={styles.tabItem}>
+                  <TouchableOpacity
+                    key={route.key}
+                    style={styles.tabItem}
+                    accessibilityRole="button"
+                    accessibilityState={isFocused ? { selected: true } : {}}
+                    accessibilityLabel={options.tabBarAccessibilityLabel}
+                    testID={options.tabBarTestID}
+                    onPress={onPress}
+                    activeOpacity={0.8}
+                  >
                     <View 
                       style={[
                         styles.iconContainer,
@@ -127,20 +129,9 @@ const GlassmorphismTabBar = ({ state, descriptors, navigation }: any) => {
                           isFocused && styles.activeIndicatorVisible
                         ]} 
                       />
-                      <TouchableOpacity
-                        style={styles.labelTouchable}
-                        accessibilityRole="button"
-                        accessibilityState={isFocused ? { selected: true } : {}}
-                        accessibilityLabel={options.tabBarAccessibilityLabel}
-                        testID={options.tabBarTestID}
-                        onPress={onPress}
-                        onLongPress={onLongPress}
-                        activeOpacity={0.8}
-                      >
-                        <View style={styles.labelSpacer} />
-                      </TouchableOpacity>
+                      <View style={styles.labelSpacer} />
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
             </View>

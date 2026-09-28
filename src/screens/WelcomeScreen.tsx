@@ -488,7 +488,7 @@ const WelcomeScreen: React.FC<Props> = ({ navigation }) => {
             },
           ]}
         >
-          EthiCore
+          Ethicore
         </Animated.Text>
 
         {/* Accent line — gradient animated */}

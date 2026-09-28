@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CourseObjectivesScreen from '../../screens/CourseObjectivesScreen';
 
 export type ObjectivesStackParamList = {
-  Objectives: undefined;
+  ObjectivesHome: undefined;
 };
 
 const Stack = createStackNavigator<ObjectivesStackParamList>();
@@ -11,11 +11,11 @@ const Stack = createStackNavigator<ObjectivesStackParamList>();
 const ObjectivesNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Objectives"
+      initialRouteName="ObjectivesHome"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen 
-        name="Objectives" 
+        name="ObjectivesHome"
         component={CourseObjectivesScreen} 
       />
     </Stack.Navigator>

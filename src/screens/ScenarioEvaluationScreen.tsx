@@ -18,7 +18,7 @@ import { TypewriterText } from '@/components/TypewriterText';
 import { chapters, courseObjectives } from '../data/courseData';
 import { saveScenarioResult } from '../utils/storage';
 import { useNetworkStatus } from '../utils/network';
-import { evaluateWithGroq, EvaluationResult } from '../services/geminiBridge';
+import { evaluateWithGemini, EvaluationResult } from '../services/geminiBridge';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. SINGLE AI LIFECYCLE STATE MACHINE
@@ -43,7 +43,7 @@ const AI_STATE_TRANSITIONS: Record<AIState, AIState[]> = {
 };
 
 function canTransition(from: AIState, to: AIState): boolean {
-  return AI_STATE_TRANSITIONS[from].includes(to);
+  return from === to || AI_STATE_TRANSITIONS[from].includes(to);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -66,8 +66,7 @@ interface EvaluationContext {
   evaluationResult: EvaluationResult | null;
   decision: any;
   scenario: any;
-  localAiEvaluation: any;
-  effectiveVerdict: string;
+  effectiveVerdict: string | null;
   isUnethical: boolean;
   evaluationSummary: string;
   evaluationRecommendation: string;
@@ -85,11 +84,6 @@ interface EvaluationContext {
 // ─────────────────────────────────────────────────────────────────────────────
 // 3. UTILITIES (unchanged)
 // ─────────────────────────────────────────────────────────────────────────────
-const normalizeText = (value?: string) => (value || '').toLowerCase();
-
-const collectTokens = (value: string) =>
-  value.split(/[^a-z0-9]+/).filter(Boolean);
-
 const sanitizeDisplayText = (value?: string | null) => {
   if (!value) return '';
   return String(value)
@@ -99,9 +93,11 @@ const sanitizeDisplayText = (value?: string | null) => {
     .trim();
 };
 
-const getOverlapTokens = (sourceText: string, referenceText: string) => {
-  const sourceTokens = new Set(collectTokens(sourceText));
-  return collectTokens(referenceText).filter(token => sourceTokens.has(token)).slice(0, 8);
+const isValidEvaluationResult = (value: unknown): value is EvaluationResult => {
+  if (!value || typeof value !== 'object') return false;
+  const verdict = (value as Partial<EvaluationResult>).verdict;
+  const reasoning = (value as Partial<EvaluationResult>).reasoning;
+  return (verdict === 'ethical' || verdict === 'unethical') && typeof reasoning === 'string' && reasoning.trim().length > 0;
 };
 
 const TOTAL_STEPS = 4;
@@ -125,7 +121,7 @@ const ScenarioEvaluationScreen: React.FC = () => {
   const route: any = useRoute();
   const insets = useSafeAreaInsets();
   const { decision, scenario } = route.params || {};
-  const { isOnline, isLoading, isReconnecting } = useNetworkStatus();
+  const { isOnline, isLoading } = useNetworkStatus();
 
   const chapterNumber = Number(scenario?.chapter ?? scenario?.chapterId ?? scenario?.additionalNotes?.chapter ?? 0);
   const accent = chapterAccentMap[chapterNumber as keyof typeof chapterAccentMap] ?? chapterAccentMap[1];
@@ -138,113 +134,20 @@ const ScenarioEvaluationScreen: React.FC = () => {
 
   const curriculumChapters = useMemo(() => chapters.filter(chapter => Number(chapter.id) <= 7), []);
 
-  const courseKnowledgeBase = useMemo(() => {
-    const topicKnowledge = curriculumChapters
-      .flatMap(chapter => chapter.topics.map(topic => [topic.title, topic.summary, topic.contentSummary, topic.content].filter(Boolean).join(' ')))
-      .join(' ');
-    return `${topicKnowledge} ${courseObjectives.join(' ')}`.toLowerCase();
-  }, [curriculumChapters]);
-
-  const moduleMatches = useMemo(() => {
-    const sourceText = [
-      scenario?.scenarioSetup, scenario?.title, decision?.title, decision?.analysis,
-      decision?.immediate, decision?.ripple, decision?.longTerm,
-      decision?.immediateExplanation, decision?.rippleExplanation, decision?.longTermExplanation,
-    ]
-      .filter(Boolean).join(' ').toLowerCase();
-
-    return curriculumChapters
-      .flatMap(chapter => chapter.topics.map(topic => {
-        const topicText = [topic.title, topic.summary, topic.contentSummary, topic.content, topic.quote]
-          .filter(Boolean).join(' ').toLowerCase();
-        const overlapTokens = getOverlapTokens(topicText, sourceText);
-        const score = overlapTokens.length
-          + (sourceText.includes('privacy') && topicText.includes('privacy') ? 2 : 0)
-          + (sourceText.includes('ethics') && topicText.includes('ethics') ? 2 : 0);
-        return { topic, chapterTitle: chapter.title, score, overlapTokens };
-      }))
-      .filter(item => item.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 4);
-  }, [curriculumChapters, decision, scenario]);
-
   // Evaluation result state needs to be available for derived memos
-  const [evaluationResult, setEvaluationResult] = useState<EvaluationResult | null>(decision?.evaluationResult ?? null);
-
-  const effectiveVerdict = useMemo(
-    () => evaluationResult?.verdict ?? decision?.decisionCategory ?? (decision?.ethical === false ? 'unethical' : 'ethical'),
-    [evaluationResult, decision]
+  const [evaluationResult, setEvaluationResult] = useState<EvaluationResult | null>(
+    isValidEvaluationResult(decision?.evaluationResult) ? decision.evaluationResult : null,
   );
+
+  const effectiveVerdict = evaluationResult?.verdict ?? null;
   const isUnethical = effectiveVerdict === 'unethical';
 
-  const localAiEvaluation = useMemo(() => {
-    const scenarioText = [
-      scenario?.scenarioSetup, scenario?.title, decision?.title, decision?.analysis,
-      decision?.immediate, decision?.ripple, decision?.longTerm,
-      decision?.immediateExplanation, decision?.rippleExplanation, decision?.longTermExplanation,
-      courseKnowledgeBase,
-      moduleMatches.map(match => `${match.topic.title} ${match.chapterTitle}`).join(' '),
-    ].filter(Boolean).join(' ').toLowerCase();
-
-    const detectedSignals: string[] = [];
-    if (/(privacy|data|personal|confidential|record|information)/.test(scenarioText)) detectedSignals.push('privacy and information handling');
-    if (/(harm|safety|risk|unsafe|security|damage|vulnerab)/.test(scenarioText)) detectedSignals.push('safety and harm prevention');
-    if (/(transparency|disclose|report|notify|honest|consent|permission)/.test(scenarioText)) detectedSignals.push('transparency and accountability');
-    if (/(fair|justice|equal|responsib|trust|stakeholder)/.test(scenarioText)) detectedSignals.push('fairness and stakeholder trust');
-
-    const topicHint = moduleMatches[0]?.topic.title || scenario?.title || decision?.title || 'the learning modules';
-    const moduleReferences = moduleMatches.slice(0, 3).map(match => match.topic.title);
-    const decisionLabel = decision?.title || "the user's choice";
-    const decisionDescriptor = effectiveVerdict === 'unethical' ? 'a risky choice' : 'a principled choice';
-
-    const reasoningSteps = [
-      `The local AI reviewed ${decisionLabel} by comparing it with the learning modules, the topic library, and the course objectives.`,
-      moduleReferences.length > 0
-        ? `The local AI found that ${decisionLabel} aligns most closely with ${moduleReferences.join(', ')} in the local content.`
-        : "The local AI focused on the decision's stated consequences and the core ideas of the course.",
-      detectedSignals.length > 0
-        ? `The local AI saw ${detectedSignals.join(', ')} as the main evidence that shaped the assessment.`
-        : 'The local AI looked for the strongest ethical signals in the decision and its context.',
-      effectiveVerdict === 'unethical'
-        ? `The local AI judged ${decisionLabel} as ${decisionDescriptor} because it appears to overlook important safeguards and values.`
-        : `The local AI judged ${decisionLabel} as ${decisionDescriptor} because it reflects strong attention to responsibility and harm prevention.`,
-    ];
-
-    const summary = effectiveVerdict === 'unethical'
-      ? `The user chose ${decisionLabel}, and the local AI concludes that this decision weakens ${topicHint} by overlooking the core values the course treats as essential. It appears to place short-term convenience above responsibility, trust, and protection of others, which creates a deeper ethical concern than a simple rule violation. In practice, it suggests a pattern where the person may be acting without enough safeguards, accountability, or careful reflection on the people affected. That makes the decision more serious because the harm may not be immediate, yet the underlying reasoning is still weak and potentially damaging over time.`
-      : `The user chose ${decisionLabel}, and the local AI sees a decision that is broadly consistent with ${topicHint} and the broader course guidance. It reflects care for stakeholders, attention to harm prevention, and a thoughtful approach to risk, especially when the decision is grounded in responsibility and fairness. Even so, the strongest ethical judgment still depends on whether safeguards, transparency, and accountability remain visible throughout the process. This makes the choice ethically sound in principle, but still worthy of careful monitoring and refinement.`;
-
-    const recommendation = effectiveVerdict === 'unethical'
-      ? "The local AI recommends choosing a different path that better protects the course's core values, strengthens transparency, reduces avoidable harm, and makes accountability more visible to others."
-      : `The local AI recommends keeping this direction while continuing to monitor its impact, preserve the same safeguards, and make sure that benefit, fairness, and stakeholder trust remain central to the decision.`;
-
-    const alignmentText = effectiveVerdict === 'unethical'
-      ? `The local AI sees partial alignment with the learning material because ${decisionLabel} emphasizes ${detectedSignals[0] || 'the key ethical signals'} but leaves out several safeguards the course expects for responsible practice. The decision may appear understandable at first, yet it falls short when judged against the course's deeper expectations around fairness, accountability, and protecting people from harm.`
-      : `The local AI sees strong alignment with the learning material because ${decisionLabel} reflects the course's emphasis on ${detectedSignals[0] || 'responsible professional judgment'} and the broader SPI principles taught in the curriculum. It shows a mature awareness of consequence, stakeholder impact, and the duty to act in a way that is both ethical and professionally trustworthy.`;
-
-    const consequences: string[] = [];
-    if (detectedSignals.includes('privacy and information handling')) consequences.push('It could expose sensitive information or weaken trust if privacy is not protected.');
-    if (detectedSignals.includes('safety and harm prevention')) consequences.push('It could increase harm or operational risk if safety concerns are ignored.');
-    if (detectedSignals.includes('transparency and accountability')) consequences.push('It could create confusion or accountability gaps if the decision is not clearly explained and owned.');
-    if (detectedSignals.includes('fairness and stakeholder trust')) consequences.push('It could damage stakeholder confidence if the decision is seen as unfair or biased.');
-    if (consequences.length === 0) consequences.push('The decision may create avoidable risk and weaken confidence in the outcome.');
-
-    const benefits: string[] = [];
-    if (detectedSignals.includes('privacy and information handling')) benefits.push("A careful approach can protect people's data and strengthen professional trust.");
-    if (detectedSignals.includes('safety and harm prevention')) benefits.push('A safety-minded choice can reduce harm and support better outcomes for others.');
-    if (detectedSignals.includes('transparency and accountability')) benefits.push('A transparent choice can improve accountability and make the decision easier to justify.');
-    if (detectedSignals.includes('fairness and stakeholder trust')) benefits.push('A fair and balanced choice can improve stakeholder trust and support a stronger reputation.');
-    if (benefits.length === 0) benefits.push('The decision can still create value when it is paired with responsibility and good judgment.');
-
-    return { summary, reasoningSteps, detectedSignals, recommendation, moduleReferences, alignmentText, consequences, benefits };
-  }, [courseKnowledgeBase, curriculumChapters, decision, scenario, effectiveVerdict, moduleMatches]);
-
-  const evaluationSummary = sanitizeDisplayText(evaluationResult?.reasoning || decision?.evaluationResult?.reasoning || localAiEvaluation.summary || '');
-  const evaluationRecommendation = sanitizeDisplayText(evaluationResult?.recommendations?.[0] || decision?.evaluationResult?.recommendations?.[0] || localAiEvaluation.recommendation || '');
-  const alignmentText = sanitizeDisplayText(evaluationResult?.alignmentWithLearningMaterial || localAiEvaluation.alignmentText);
-  const consequenceItems: string[] = (evaluationResult?.possibleConsequences?.length ? evaluationResult.possibleConsequences : localAiEvaluation.consequences)
+  const evaluationSummary = sanitizeDisplayText(evaluationResult?.reasoning || '');
+  const evaluationRecommendation = sanitizeDisplayText(evaluationResult?.recommendations?.[0] || '');
+  const alignmentText = sanitizeDisplayText(evaluationResult?.alignmentWithLearningMaterial || '');
+  const consequenceItems: string[] = (evaluationResult?.possibleConsequences || [])
     .map((item: string | null | undefined) => sanitizeDisplayText(item)).filter(Boolean) as string[];
-  const benefitItems: string[] = (evaluationResult?.possibleBenefits?.length ? evaluationResult.possibleBenefits : localAiEvaluation.benefits)
+  const benefitItems: string[] = (evaluationResult?.possibleBenefits || [])
     .map((item: string | null | undefined) => sanitizeDisplayText(item)).filter(Boolean) as string[];
 
   const principles = useMemo(() => {
@@ -266,19 +169,16 @@ const ScenarioEvaluationScreen: React.FC = () => {
     const cleanedText = sanitizeDisplayText(text) || 'This decision needs a more careful ethical review.';
     const sentences = cleanedText.split(/(?<=[.!?])\s+/).map(sentence => sentence.trim()).filter(Boolean);
     let core = sentences[0] || cleanedText;
-    core = core.replace(/^(The user chose .*? and |The local AI .*? that |This decision .*? that )/i, '').trim();
+    core = core.replace(/^(The user chose .*? and |The course-based analysis .*? that |This decision .*? that )/i, '').trim();
     const signal = signals.length > 0 ? ` It shows the key concern is ${signals[0]}.` : '';
     if (category === 'unethical') return `Key takeaway: ${core}${signal} Action: choose a safer option that protects people and aligns with course ethics.`;
-    if (category === 'mixed') return `Key takeaway: ${core}${signal} Action: refine the choice to reduce risk and improve ethical alignment.`;
     return `Key takeaway: ${core}${signal} Action: keep this direction while maintaining safeguards and stakeholder care.`;
   }, []);
 
   const takeawayText = useMemo(() => {
-    if (evaluationSummary) return summarizeTakeaway(evaluationSummary, effectiveVerdict, localAiEvaluation.detectedSignals);
-    return isUnethical
-      ? 'Key takeaway: this decision is not aligned with course values. Action: choose a safer, more ethical path that protects people and trust.'
-      : 'Key takeaway: this decision is aligned with course guidance. Action: preserve its strengths while guarding against gaps.';
-  }, [evaluationSummary, effectiveVerdict, localAiEvaluation.detectedSignals, isUnethical, summarizeTakeaway]);
+    if (evaluationSummary && effectiveVerdict) return summarizeTakeaway(evaluationSummary, effectiveVerdict, []);
+    return 'The AI is evaluating this decision. The ethical classification will appear when the evaluation is complete.';
+  }, [evaluationSummary, effectiveVerdict, summarizeTakeaway]);
 
   const hasAIPrinciples = (evaluationResult?.principles?.length ?? 0) > 0;
   const aiPrinciplesText = (evaluationResult?.principles ?? [])
@@ -302,10 +202,10 @@ const ScenarioEvaluationScreen: React.FC = () => {
 
   // ── Evaluation context object passed to sections ──
   const evalCtx = useMemo<EvaluationContext>(() => ({
-    evaluationResult, decision, scenario, localAiEvaluation, effectiveVerdict, isUnethical,
+    evaluationResult, decision, scenario, effectiveVerdict, isUnethical,
     evaluationSummary, evaluationRecommendation, alignmentText, consequenceItems, benefitItems,
     principles, takeawayText, hasAIPrinciples, aiPrinciplesText, learningMaterialText, ethicalPrinciplesText,
-  }), [evaluationResult, decision, scenario, localAiEvaluation, effectiveVerdict, isUnethical,
+  }), [evaluationResult, decision, scenario, effectiveVerdict, isUnethical,
     evaluationSummary, evaluationRecommendation, alignmentText, consequenceItems, benefitItems,
     principles, takeawayText, hasAIPrinciples, aiPrinciplesText, learningMaterialText, ethicalPrinciplesText]);
 
@@ -400,12 +300,11 @@ const ScenarioEvaluationScreen: React.FC = () => {
 
     const loadEvaluation = async () => {
       if (!decision || !scenario) {
-        transitionTo('Error');
         return;
       }
 
       // If already have evaluation, skip generation
-      if (decision.evaluationResult || evaluationResult) {
+      if (evaluationResult) {
         transitionTo('Thinking');
         scheduleTimer(() => transitionTo('Typing'), 1500);
         return;
@@ -421,7 +320,7 @@ const ScenarioEvaluationScreen: React.FC = () => {
           ...courseObjectives,
         ].join('\n');
 
-        const result = await evaluateWithGroq(decision, scenario, courseContext);
+        const result = await evaluateWithGemini(decision, scenario, courseContext);
         if (isMountedRef.current) {
           setEvaluationResult(result as any);
           setEvaluationError(null);
@@ -430,8 +329,7 @@ const ScenarioEvaluationScreen: React.FC = () => {
         }
       } catch (err) {
         if (isMountedRef.current) {
-          const msg = err instanceof Error ? err.message : String(err);
-          setEvaluationError(msg);
+          setEvaluationError(err instanceof Error ? err.message : 'The evaluation service is unavailable. Please try again.');
           transitionTo('Error');
         }
       }
@@ -448,7 +346,7 @@ const ScenarioEvaluationScreen: React.FC = () => {
 
   // ── Save scenario result ──
   useEffect(() => {
-    if (!decision) return;
+    if (!decision || !evaluationResult) return;
     const item = {
       id: `${Date.now()}`,
       title: scenario?.title || decision?.title || 'Scenario',
@@ -523,24 +421,42 @@ const ScenarioEvaluationScreen: React.FC = () => {
     transitionTo('Typing');
   }, [transitionTo]);
 
+  const resetToScenarioLibrary = useCallback(() => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainTabs', params: { screen: 'Scenarios' } }],
+    });
+  }, [navigation]);
+
+  const resetToDashboard = useCallback(() => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainTabs', params: { screen: 'Home' } }],
+    });
+  }, [navigation]);
+
   // ── Back button → Back modal ──
   const handleBackPress = useCallback(() => {
-    if (aiState === 'Thinking' || aiState === 'Typing' || aiState === 'Paused') {
+    if (aiState === 'Thinking' || aiState === 'Typing') {
       prevAiStateRef.current = aiState;
       transitionTo('Paused');
       setShowBackModal(true);
+    } else if (aiState === 'Paused') {
+      clearAllTimers();
+      transitionTo('Exited');
+      resetToScenarioLibrary();
     } else {
-      navigateToChapterScreen();
+      resetToScenarioLibrary();
     }
-  }, [aiState]);
+  }, [aiState, clearAllTimers, resetToScenarioLibrary, transitionTo]);
 
   // ── Back modal: Leave → cleanup & navigate ──
   const handleConfirmBack = useCallback(() => {
     setShowBackModal(false);
     clearAllTimers();
     transitionTo('Exited');
-    navigateToChapterScreen();
-  }, [clearAllTimers, transitionTo]);
+    resetToScenarioLibrary();
+  }, [clearAllTimers, resetToScenarioLibrary, transitionTo]);
 
   // ── Back modal: Stay → restore previous state ──
   const handleCancelBack = useCallback(() => {
@@ -552,34 +468,19 @@ const ScenarioEvaluationScreen: React.FC = () => {
     }
   }, [transitionTo]);
 
-  const navigateToChapterScreen = useCallback(() => {
-    if (scenario?.chapter || scenario?.chapterId) {
-      navigation.navigate('ScenarioChapter', {
-        chapterId: Number(scenario.chapter ?? scenario.chapterId ?? 1),
-        chapterTitle: scenario?.chapterTitle || `Chapter ${scenario?.chapter ?? scenario?.chapterId ?? 1}`,
-      });
-    } else {
-      if (navigation.canGoBack()) {
-        navigation.pop(2);
-      } else {
-        navigation.navigate('DecisionOptions', { scenario });
-      }
-    }
-  }, [navigation, scenario]);
-
   // ── Try Another Scenario ──
   const handleTryAnotherScenario = useCallback(() => {
     clearAllTimers();
     transitionTo('Exited');
-    navigation.navigate('MainTabs', { screen: 'Scenarios' });
-  }, [clearAllTimers, transitionTo, navigation]);
+    resetToScenarioLibrary();
+  }, [clearAllTimers, resetToScenarioLibrary, transitionTo]);
 
   // ── Return to Dashboard ──
   const handleReturnToDashboard = useCallback(() => {
     clearAllTimers();
     transitionTo('Exited');
-    navigation.navigate('MainTabs', { screen: 'Home' });
-  }, [clearAllTimers, transitionTo, navigation]);
+    resetToDashboard();
+  }, [clearAllTimers, resetToDashboard, transitionTo]);
 
   // ── Retry on error ──
   const handleRetry = useCallback(() => {
@@ -601,32 +502,43 @@ const ScenarioEvaluationScreen: React.FC = () => {
       if (actionType !== 'GO_BACK' && actionType !== 'POP') return;
 
       // If in an active AI state, prevent and show modal
-      if (aiState === 'Thinking' || aiState === 'Typing' || aiState === 'Paused') {
+      if (aiState === 'Thinking' || aiState === 'Typing') {
         e.preventDefault();
         prevAiStateRef.current = aiState;
         transitionTo('Paused');
         setShowBackModal(true);
+      } else if (aiState === 'Paused') {
+        e.preventDefault();
+        clearAllTimers();
+        transitionTo('Exited');
+        resetToScenarioLibrary();
       }
       // Otherwise allow navigation
     });
     return unsubscribe;
-  }, [navigation, aiState]);
+  }, [navigation, aiState, clearAllTimers, resetToScenarioLibrary, transitionTo]);
 
   // ── Android hardware back button ──
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        if (aiState === 'Thinking' || aiState === 'Typing' || aiState === 'Paused') {
+        if (aiState === 'Thinking' || aiState === 'Typing') {
           prevAiStateRef.current = aiState;
           transitionTo('Paused');
           setShowBackModal(true);
           return true; // prevent default
         }
+        if (aiState === 'Paused') {
+          clearAllTimers();
+          transitionTo('Exited');
+          resetToScenarioLibrary();
+          return true;
+        }
         return false;
       };
       const sub = BackHandler.addEventListener('hardwareBackPress', onBackPress);
       return () => sub.remove();
-    }, [aiState, transitionTo])
+    }, [aiState, clearAllTimers, resetToScenarioLibrary, transitionTo])
   );
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -730,8 +642,6 @@ const ScenarioEvaluationScreen: React.FC = () => {
   // ─────────────────────────────────────────────────────────────────────────────
   // 14. DERIVED UI STATE
   // ─────────────────────────────────────────────────────────────────────────────
-  const isOffline = !isLoading && !isReconnecting && isOnline === false;
-
   const aiStatusText = useMemo(() => {
     switch (aiState) {
       case 'Idle': return 'Preparing evaluation...';
@@ -827,18 +737,6 @@ const ScenarioEvaluationScreen: React.FC = () => {
   // ─────────────────────────────────────────────────────────────────────────────
   // 16. OFFLINE SCREEN
   // ─────────────────────────────────────────────────────────────────────────────
-  if (isOffline) {
-    return (
-      <View style={styles.offlineContainer}>
-        <Text style={styles.offlineTitle}>Evaluation is not available</Text>
-        <Text style={styles.offlineText}>You are not connected to the internet right now. Please reconnect and try again.</Text>
-        <TouchableOpacity style={styles.offlineButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.offlineButtonText}>Go Back</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   // ─────────────────────────────────────────────────────────────────────────────
   // 17. MAIN RENDER
   // ─────────────────────────────────────────────────────────────────────────────
@@ -952,14 +850,18 @@ const ScenarioEvaluationScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* Result badge */}
-        <View style={[styles.headerBadge, { backgroundColor: isUnethical ? '#FEE2E2' : '#DCFCE7' }]}>
-          <Ionicons name={isUnethical ? 'thumbs-down' : 'thumbs-up'} size={50} color={isUnethical ? '#B91C1C' : '#047857'} />
+        {/* AI result */}
+        <View style={[styles.headerBadge, { backgroundColor: evaluationResult ? (isUnethical ? '#FEE2E2' : '#DCFCE7') : '#E2E8F0' }]}>
+          {evaluationResult ? (
+            <Ionicons name={isUnethical ? 'thumbs-down' : 'thumbs-up'} size={50} color={isUnethical ? '#B91C1C' : '#047857'} />
+          ) : (
+            <ActivityIndicator size="large" color="#64748B" />
+          )}
         </View>
 
-        <Text style={styles.resultTitle}>{isUnethical ? 'Unethical Decision' : 'Ethical Decision'}</Text>
+        <Text style={styles.resultTitle}>{evaluationResult ? (isUnethical ? 'Unethical Decision' : 'Ethical Decision') : 'AI Evaluation in Progress'}</Text>
         <Text style={styles.resultSubtitle}>
-          {isUnethical ? 'This choice violates ethical standards.' : 'Your choice aligns with SPI principles.'}
+          {evaluationResult ? (isUnethical ? 'The AI classified this choice as unethical.' : 'The AI classified this choice as ethical.') : 'The AI is deciding whether this choice is ethical or unethical.'}
         </Text>
 
         {/* Decision card */}
@@ -970,7 +872,7 @@ const ScenarioEvaluationScreen: React.FC = () => {
         </View>
 
         {/* Analysis Card */}
-        <View style={[styles.analysisCard, { backgroundColor: isUnethical ? '#FEEFF0' : '#E6FBF2' }]}>
+        <View style={[styles.analysisCard, { backgroundColor: evaluationResult ? (isUnethical ? '#FEEFF0' : '#E6FBF2') : '#F8FAFC' }]}>
           <View style={styles.analysisHeaderRow}>
             <Text style={styles.analysisTitle}>Evaluation</Text>
           </View>

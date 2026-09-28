@@ -1,0 +1,263 @@
+<mxfile host="app.diagrams.net" modified="2026-07-29T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="ethicore-four-module-sequence" name="EthiCore Four Module Sequence">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="EthiCore App - Four Module Sequence Diagram" style="text;html=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;fontColor=#1E293B;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="250" y="20" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Modules are separated into Course Objectives, Learning, Progress Tracker, and Quiz flows." style="text;html=1;strokeColor=none;fillColor=none;fontSize=13;fontColor=#475569;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="275" y="58" width="850" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="actor_user" value="Learner" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="75" y="120" width="50" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="participant_nav" value="App Navigation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="205" y="120" width="130" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="participant_objectives" value="Course Objectives Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="405" y="120" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="participant_learning" value="Learning Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="635" y="120" width="140" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="participant_progress" value="Progress Tracker Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="845" y="120" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="participant_quiz" value="Quiz Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="1085" y="120" width="130" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="participant_storage" value="AsyncStorage / Data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="120" width="130" height="44" as="geometry" />
+        </mxCell>
+
+        <mxCell id="life_user" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="95" y="205" width="10" height="1585" as="geometry" />
+        </mxCell>
+        <mxCell id="life_nav" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="265" y="170" width="10" height="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="life_objectives" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="170" width="10" height="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="life_learning" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="170" width="10" height="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="life_progress" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="170" width="10" height="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="life_quiz" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="170" width="10" height="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="life_storage" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#94A3B8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="170" width="10" height="1620" as="geometry" />
+        </mxCell>
+
+        <mxCell id="frame_obj" value="Module 1: Course Objectives" style="swimlane;html=1;startSize=30;horizontal=1;rounded=0;collapsible=0;fillColor=#FFFBEB;strokeColor=#D97706;fontStyle=1;fontColor=#92400E;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="235" width="1320" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_learn" value="Module 2: Learning Module" style="swimlane;html=1;startSize=30;horizontal=1;rounded=0;collapsible=0;fillColor=#FFF1F2;strokeColor=#E11D48;fontStyle=1;fontColor=#9F1239;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="585" width="1320" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_progress" value="Module 3: Progress Tracker" style="swimlane;html=1;startSize=30;horizontal=1;rounded=0;collapsible=0;fillColor=#F0FDF4;strokeColor=#16A34A;fontStyle=1;fontColor=#166534;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1055" width="1320" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_quiz" value="Module 4: Quiz Module" style="swimlane;html=1;startSize=30;horizontal=1;rounded=0;collapsible=0;fillColor=#F5F3FF;strokeColor=#7C3AED;fontStyle=1;fontColor=#5B21B6;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1405" width="1320" height="350" as="geometry" />
+        </mxCell>
+
+        <mxCell id="obj_note" value="Screen source: CourseObjectivesScreen, ObjectivesNavigator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F59E0B;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="80" y="495" width="260" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="learn_note" value="Screen flow: ChapterList - ChapterDetail - Topic - Activity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FB7185;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="80" y="965" width="310" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="progress_note" value="ProgressContext calculates learning, quiz, activity, and overall progress." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#22C55E;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1315" width="370" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="quiz_note" value="Quiz flow records attempts and updates the highest chapter score." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A78BFA;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1705" width="350" height="32" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a1" value="Tap Course Objectives" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="290" as="sourcePoint" />
+            <mxPoint x="270" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a2" value="navigate(MainTabs, Objectives)" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="330" as="sourcePoint" />
+            <mxPoint x="485" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3" value="load objectives and outcomes" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="370" as="sourcePoint" />
+            <mxPoint x="1325" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4" value="return objective content" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1325" y="410" as="sourcePoint" />
+            <mxPoint x="485" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5" value="display learning goals" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="455" as="sourcePoint" />
+            <mxPoint x="105" y="455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="b1" value="Tap Learning Module" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="650" as="sourcePoint" />
+            <mxPoint x="270" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b2" value="navigate(MainTabs, Learn)" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="690" as="sourcePoint" />
+            <mxPoint x="705" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3" value="request chapters and lock state" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="705" y="730" as="sourcePoint" />
+            <mxPoint x="925" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b4" value="loadChapters / loadLastVisitedTopic" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="925" y="770" as="sourcePoint" />
+            <mxPoint x="1325" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b5" value="return saved learning state" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1325" y="810" as="sourcePoint" />
+            <mxPoint x="925" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b6" value="show chapters, topics, activity state" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="705" y="850" as="sourcePoint" />
+            <mxPoint x="105" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b7" value="Complete topic or activity" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="890" as="sourcePoint" />
+            <mxPoint x="705" y="890" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b8" value="markTopicComplete / recordActivityTaken" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="705" y="930" as="sourcePoint" />
+            <mxPoint x="925" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b9" value="saveChapters and saveProgress" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="925" y="970" as="sourcePoint" />
+            <mxPoint x="1325" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="c1" value="Open Home / Progress view" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="1120" as="sourcePoint" />
+            <mxPoint x="270" y="1120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c2" value="render ProgressTracker" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1160" as="sourcePoint" />
+            <mxPoint x="925" y="1160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c3" value="loadProgress and activity attempts" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="925" y="1200" as="sourcePoint" />
+            <mxPoint x="1325" y="1200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4" value="return progress records" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1325" y="1240" as="sourcePoint" />
+            <mxPoint x="925" y="1240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c5" value="calculate learning, quiz, activity, overall %" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="925" y="1280" as="sourcePoint" />
+            <mxPoint x="925" y="1280" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1035" y="1280" />
+              <mxPoint x="1035" y="1320" />
+              <mxPoint x="925" y="1320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c6" value="display ring and progress summary" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="925" y="1345" as="sourcePoint" />
+            <mxPoint x="105" y="1345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="d1" value="Tap Quiz Module" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="1470" as="sourcePoint" />
+            <mxPoint x="270" y="1470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d2" value="navigate(MainTabs, Quiz)" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1510" as="sourcePoint" />
+            <mxPoint x="1150" y="1510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d3" value="build/select chapter quiz" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150" y="1550" as="sourcePoint" />
+            <mxPoint x="1325" y="1550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d4" value="return quiz questions" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1325" y="1590" as="sourcePoint" />
+            <mxPoint x="1150" y="1590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d5" value="answer questions and submit" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="1630" as="sourcePoint" />
+            <mxPoint x="1150" y="1630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d6" value="recordQuizTaken(score)" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150" y="1670" as="sourcePoint" />
+            <mxPoint x="925" y="1670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d7" value="save quiz result and progress" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#334155;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="925" y="1710" as="sourcePoint" />
+            <mxPoint x="1325" y="1710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d8" value="show QuizResult with score, feedback, retake option" style="endArrow=open;dashed=1;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150" y="1740" as="sourcePoint" />
+            <mxPoint x="105" y="1740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,19 @@
+{
+  "extends": "./node_modules/expo/tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "rootDir": ".",
+    "noEmit": true,
+    "ignoreDeprecations": "6.0",
+    "types": ["node"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["App.tsx", "src/**/*", "api/**/*", "data/quizQuestions.ts", "data/courseData.ts", "utils/syncQueue.ts", "utils/storage.ts", "utils/shuffle.ts", "utils/quizWriting.ts", "utils/chapterColors.ts", "utils/api.ts", "utils/aiScenario.ts", "hooks/index.ts", "components/Ionicons.tsx"],
+  "exclude": ["node_modules"]
+}

@@ -28,10 +28,6 @@ export const saveChapters = async (chapters: Chapter[]): Promise<void> => {
       seen.add(ch.id);
       return true;
     });
-    // DEBUG: log chapter order when saving
-    try {
-      console.log('saveChapters: saving order ->', uniqueChapters.map(c => c.id));
-    } catch (e) {}
     await AsyncStorage.setItem(CHAPTERS_KEY, JSON.stringify(uniqueChapters));
     await AsyncStorage.setItem(DATA_VERSION_KEY, String(CURRENT_DATA_VERSION));
     const metadata = await getCacheMetadata();
@@ -59,13 +55,8 @@ export const loadChapters = async (): Promise<Chapter[] | null> => {
           seen.add(c.id);
           return true;
         });
-        try { console.log('loadChapters: loaded order ->', parsed.map((c: Chapter) => c.id)); } catch (e) {}
-        if (unique.length !== parsed.length) {
-          try { console.log('loadChapters: deduped order ->', unique.map(c => c.id)); } catch (e) {}
-        }
         return unique;
       } else {
-        try { console.log('loadChapters: no chapters saved'); } catch (e) {}
         return null;
       }
     } catch (e) {
@@ -169,7 +160,18 @@ export const clearActivityAttempts = async (): Promise<void> => {
 
 export const clearAllData = async (): Promise<void> => {
   try {
-    await AsyncStorage.multiRemove([CHAPTERS_KEY, PROGRESS_KEY, LAST_TOPIC_KEY, ACTIVITY_ATTEMPTS_KEY, COMPLETION_MODAL_KEY, SCENARIO_CATALOG_KEY]);
+    await AsyncStorage.multiRemove([
+      CHAPTERS_KEY,
+      PROGRESS_KEY,
+      LAST_TOPIC_KEY,
+      ACTIVITY_ATTEMPTS_KEY,
+      COMPLETION_MODAL_KEY,
+      TOPIC_NOTES_KEY,
+      SCENARIO_CATALOG_KEY,
+      CACHE_METADATA_KEY,
+      SCENARIO_HISTORY_KEY,
+      DATA_VERSION_KEY,
+    ]);
   } catch (error) {
     console.error('Error clearing data:', error);
   }
@@ -379,9 +381,6 @@ export const replaceTopicNotes = async (chapterId: number, topicId: string, note
       notesByTopic[key] = normalizedNotes;
     }
 
-    // DEBUG: log replacement operation
-    try { console.log(`replaceTopicNotes: key=${key} count=${normalizedNotes.length}`); } catch (e) {}
-
     await AsyncStorage.setItem(TOPIC_NOTES_KEY, JSON.stringify(notesByTopic));
   } catch (error) {
     console.error('Error replacing topic notes:', error);
@@ -553,7 +552,7 @@ export type SavedScenario = {
   id: string;
   title: string;
   decisionTitle: string;
-  verdict: 'Ethical' | 'Mixed' | 'Unethical';
+  verdict: 'Ethical' | 'Unethical';
   timestamp: string;
   violatedPrinciples?: string[];
   mappedModules?: Record<string, string[]>;
