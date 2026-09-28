@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Alert,
   View,
   Text,
   StyleSheet,
@@ -15,9 +14,8 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '../components/Ionicons';
-import { useNetworkStatus } from '../utils/network';
 import { chapters, courseObjectives } from '../data/courseData';
-import { evaluateWithGroq } from '../services/geminiBridge';
+import { evaluateWithGemini } from '../services/geminiBridge';
 
 type DecisionCategory = 'ethical' | 'mixed' | 'unethical';
 type ConsequenceStage = 'Immediate' | 'Ripple' | 'Long-Term';
@@ -921,31 +919,23 @@ const ConsequenceTimelineScreen: React.FC = () => {
   const { decision, scenario, stage = 'Immediate' } = route.params || {};
   const chapterTitle = route.params?.chapterTitle ?? scenario?.chapterTitle ?? `Chapter ${scenario?.chapterId ?? scenario?.chapter ?? 1}`;
   const [isEvaluating, setIsEvaluating] = useState(false);
+  const [evaluationError, setEvaluationError] = useState<string | null>(null);
   const [evaluationDots, setEvaluationDots] = useState('');
   const [isStageImageReady, setIsStageImageReady] = useState(false);
-  const decisionCategory =
-    decision?.decisionCategory === 'ethical' ||
-    decision?.decisionCategory === 'mixed' ||
-    decision?.decisionCategory === 'unethical'
-      ? decision.decisionCategory
-      : decision?.verdict === 'ethical' || decision?.verdict === 'mixed' || decision?.verdict === 'unethical'
-        ? decision.verdict
-        : decision?.ethical === false
-          ? 'unethical'
-          : 'ethical';
-  const normalizedDecisionCategory: DecisionCategory =
-    decisionCategory === 'ethical' || decisionCategory === 'mixed' || decisionCategory === 'unethical'
-      ? decisionCategory
-      : 'ethical';
+  const evaluationVerdict = decision?.evaluationResult?.verdict;
+  const illustrationCategory = decision?.consequenceImageCategory;
+  const normalizedDecisionCategory: DecisionCategory | undefined =
+    illustrationCategory === 'ethical' || illustrationCategory === 'mixed' || illustrationCategory === 'unethical'
+      ? illustrationCategory
+      : evaluationVerdict === 'ethical' || evaluationVerdict === 'unethical'
+        ? evaluationVerdict
+        : undefined;
   const chapterNumber = Number(scenario?.chapter ?? scenario?.chapterId ?? scenario?.additionalNotes?.chapter ?? 0);
   const accent = chapterAccentMap[chapterNumber as keyof typeof chapterAccentMap] ?? chapterAccentMap[1];
   const scenarioNumber = Number(
     scenario?.scenarioNumber ?? scenario?.additionalNotes?.scenarioNumber ?? scenario?.id ?? 0,
   );
-  const isUnethical = normalizedDecisionCategory === 'unethical';
-  const isMixed = normalizedDecisionCategory === 'mixed';
   const aiReasoning = decision?.aiReasoning || 'The system reviewed the choice using ethical principles and prepared the consequence timeline.';
-  const { isOnline } = useNetworkStatus();
   const pulseAnimation = useRef(new Animated.Value(1)).current;
 
   const courseContext = useMemo(() => {
@@ -1043,7 +1033,7 @@ const ConsequenceTimelineScreen: React.FC = () => {
       description: randomizeConsequenceText('Long-Term', decision?.longTerm || 'The lasting consequences for your career and the organization.'),
       explanation: randomizeExplanationText('Long-Term', decision?.longTermExplanation || ''),
     },
-  }), [decision?.id, decision?.immediate, decision?.ripple, decision?.longTerm, decision?.immediateExplanation, decision?.rippleExplanation, decision?.longTermExplanation, isMixed, isUnethical]);
+  }), [decision?.id, decision?.immediate, decision?.ripple, decision?.longTerm, decision?.immediateExplanation, decision?.rippleExplanation, decision?.longTermExplanation]);
 
   type TimelineStage = {
     key: ConsequenceStage;
@@ -1101,26 +1091,18 @@ const ConsequenceTimelineScreen: React.FC = () => {
       return;
     }
 
-    if (isOnline === false) {
-      Alert.alert(
-        'Internet required',
-        'You must be connected to the internet to access evaluation.',
-      );
+    if (decision?.evaluationResult?.verdict === 'ethical' || decision?.evaluationResult?.verdict === 'unethical') {
+      navigation.navigate('ScenarioEvaluation', { decision, scenario, chapterTitle });
       return;
     }
 
     if (isEvaluating) return;
 
     setIsEvaluating(true);
-    const minimumDelayMs = 10000;
-    const evaluationStart = Date.now();
+    setEvaluationError(null);
 
     try {
-      const result = await evaluateWithGroq(decision, scenario, courseContext);
-      const elapsed = Date.now() - evaluationStart;
-      if (elapsed < minimumDelayMs) {
-        await new Promise(resolve => setTimeout(resolve, minimumDelayMs - elapsed));
-      }
+      const result = await evaluateWithGemini(decision, scenario, courseContext);
       setIsEvaluating(false);
       navigation.navigate('ScenarioEvaluation', {
         decision: { ...decision, evaluationResult: result },
@@ -1129,7 +1111,7 @@ const ConsequenceTimelineScreen: React.FC = () => {
       });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      Alert.alert('Evaluation failed', message || 'Unable to generate evaluation.');
+      setEvaluationError(message || 'The evaluation service is unavailable. Check your connection and retry.');
       setIsEvaluating(false);
     }
   };
@@ -1243,11 +1225,7 @@ const ConsequenceTimelineScreen: React.FC = () => {
           style={[
             styles.decisionCard,
             {
-              borderLeftColor: isUnethical
-                ? '#1E3A8A'
-                : isMixed
-                ? '#1E3A8A'
-                : '#1E3A8A',
+              borderLeftColor: '#1E3A8A',
             },
           ]}
         >
@@ -1292,7 +1270,7 @@ const ConsequenceTimelineScreen: React.FC = () => {
                   ) : null}
                 </>
               ) : (
-                <Text style={styles.stageImageText}>Image Placeholder</Text>
+                <Text style={styles.stageImageText}>A verdict-specific illustration appears after AI evaluation.</Text>
               )}
             </View>
             <Text style={styles.stageDescription}>{currentStage.description}</Text>
@@ -1310,9 +1288,16 @@ const ConsequenceTimelineScreen: React.FC = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.actionButton, styles.nextButton]} onPress={handleNext} disabled={isEvaluating}>
-            <Text style={styles.nextButtonText}>{isEvaluating ? 'Evaluating' : isFinalStage ? 'Evaluate' : 'Next'}</Text>
+            <Text style={styles.nextButtonText}>{isEvaluating ? 'Evaluating' : evaluationError ? 'Retry evaluation' : isFinalStage ? 'Evaluate' : 'Next'}</Text>
           </TouchableOpacity>
         </View>
+
+        {evaluationError ? (
+          <View style={styles.evaluationError} accessibilityRole="alert">
+            <Text style={styles.evaluationErrorText}>{evaluationError}</Text>
+            <Text style={styles.evaluationErrorHint}>No evaluation result was generated. Retry when the service is available.</Text>
+          </View>
+        ) : null}
 
         <TouchableOpacity
           style={styles.secondaryButton}
@@ -1564,6 +1549,9 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   nextButtonText: { color: '#FFFFFF', fontWeight: '800', fontSize: 15, letterSpacing: 0.2 },
+  evaluationError: { marginTop: 0, marginBottom: 16, padding: 14, borderRadius: 12, backgroundColor: '#FEF2F2', borderWidth: 1, borderColor: '#FECACA' },
+  evaluationErrorText: { color: '#991B1B', fontSize: 14, fontWeight: '700' },
+  evaluationErrorHint: { color: '#7F1D1D', fontSize: 13, marginTop: 4, lineHeight: 19 },
   previousButton: {
     backgroundColor: '#FFFFFF',
     borderWidth: 1,

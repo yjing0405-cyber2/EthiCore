@@ -28,7 +28,7 @@ export interface ComicDecision extends ConsequenceFields {
   title: string;
   description: string;
   ethical: boolean;
-  decisionCategory?: 'ethical' | 'mixed' | 'unethical';
+  decisionCategory?: 'ethical' | 'unethical' | 'mixed';
   analysis: string;
   violatedPrinciples: string[];
   recommendedActions: string[];
@@ -108,6 +108,7 @@ function createGenericScenario(
           title: 'Take the Ethical Path',
           description: 'Choose the option that upholds professional standards and integrity.',
           ethical: true,
+          decisionCategory: 'ethical',
           analysis: 'This decision aligns with core ethical principles and protects all stakeholders.',
           immediate: 'The situation is handled with transparency and care.',
           ripple: 'Trust is maintained and standards are upheld.',
@@ -116,22 +117,11 @@ function createGenericScenario(
           recommendedActions: ['Document the decision', 'Communicate clearly', 'Follow up'],
         },
         {
-          id: 'mixed-response',
-          title: 'Take a Compromising Path',
-          description: 'Choose a middle-ground option that partially addresses the issue.',
-          ethical: false,
-          analysis: 'This decision partially addresses the issue but leaves room for improvement.',
-          immediate: 'The immediate concern is addressed but not fully resolved.',
-          ripple: 'Some trust is maintained but questions remain.',
-          longTerm: 'The situation may resurface if not fully addressed.',
-          violatedPrinciples: ['Transparency'],
-          recommendedActions: ['Reassess the situation', 'Seek guidance', 'Plan follow-up'],
-        },
-        {
           id: 'unethical-response',
           title: 'Take the Unethical Path',
           description: 'Choose the option that prioritizes convenience over ethics.',
           ethical: false,
+          decisionCategory: 'unethical',
           analysis: 'This decision violates professional standards and may cause harm.',
           immediate: 'The immediate problem is avoided but at a cost.',
           ripple: 'Trust is eroded and standards are compromised.',
@@ -160,7 +150,7 @@ function createGenericScenario(
       ? `Ethical Principle: ${detail.title}. Always prioritize integrity, legal compliance, and professional responsibility.`
       : 'Always consider the ethical implications of your actions.',
     scenarioSetup: prompt || detail?.description || 'An ethical dilemma has arisen in the workplace.',
-    decisions,
+    decisions: decisions as ComicDecision[],
     additionalNotes: {
       source: detail ? 'scenario-database' : 'generated',
       category: detail ? 'ethics' : 'general',

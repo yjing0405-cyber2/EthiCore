@@ -159,7 +159,7 @@ export interface ScenarioHistory {
   outcome: string;
   timestamp: number;
 }
-export type VerdictType = 'ethical' | 'mixed' | 'unethical';
+export type VerdictType = 'ethical' | 'unethical';
 
 export interface Scenario {
   id: string;
@@ -189,7 +189,7 @@ export interface ConsequenceFields {
 export interface Decision extends ConsequenceFields {
   id: string;
   title: string;
-  decisionCategory?: 'ethical' | 'unethical' | 'mixed';
+  decisionCategory?: 'ethical' | 'unethical';
   ethical?: boolean;
   analysis?: string;
   violatedPrinciples?: string[];

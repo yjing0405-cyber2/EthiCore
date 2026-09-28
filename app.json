@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "EthiCore",
+    "name": "Ethicore",
     "slug": "tom-samson",
     "scheme": "ethicore",
     "version": "1.0.3",
-    "orientation": "portrait",
     "userInterfaceStyle": "light",
     "assetBundlePatterns": [
       "src/assets/**/*"
@@ -15,10 +14,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.dct.ethicore",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false,
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true
-        }
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -35,11 +31,6 @@
       "expo-font",
       "expo-status-bar"
     ],
-    "extra": {
-      "eas": {
-        "projectId": "b8e1cdc7-963f-4d0a-98bb-d1c9eb730b13"
-      }
-    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
@@ -47,6 +38,12 @@
       "ios",
       "android"
     ],
-    "owner": "tmtmsmsns-team"
+    "owner": "jhing_04",
+    "extra": {
+      "aiEvaluationUrl": "https://ethi-core-app.vercel.app/api/evaluate",
+      "eas": {
+        "projectId": "449ac5a4-4598-4570-ad29-6e9c69d6ba64"
+      }
+    }
   }
 }

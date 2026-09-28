@@ -163,12 +163,6 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
           }).map(ch => restoreTopicLocking(ch));
 
           setChapters(restoredChapters);
-          // DEBUG: log chapter order on restore to help investigate duplicate/ordering issues
-          try {
-            console.log('ProgressContext: restoredChapters order ->', restoredChapters.map(c => c.id));
-          } catch (e) {
-            // swallow in environments without console
-          }
           await saveChapters(restoredChapters);
 
           if (storedProgress) {
@@ -188,10 +182,6 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
           }));
 
           setChapters(starterChapters);
-          // DEBUG: log chapter order on first run
-          try {
-            console.log('ProgressContext: starterChapters order ->', starterChapters.map(c => c.id));
-          } catch (e) {}
           setProgress(defaultProgress);
           await saveChapters(starterChapters);
           await saveProgress(defaultProgress);

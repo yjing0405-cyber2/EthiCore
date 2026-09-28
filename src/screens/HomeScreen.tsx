@@ -346,7 +346,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <Animated.View style={[styles.heroWrapper, { opacity: heroFade, transform: [{ scale: heroScale }] }]}>
           <LinearGradient colors={[COLORS.hero.start, COLORS.hero.mid, COLORS.hero.end]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.heroCard}>
             <Animated.View style={[styles.header, { opacity: headerFade, transform: [{ translateY: headerSlide }] }]}>
-              <Text style={styles.headerTitle}>EthiCore</Text>
+              <Text style={styles.headerTitle}>Ethicore</Text>
               <Text style={styles.headerSubtitle}>Learn ethics through modules, quizzes and Scenarios</Text>
             </Animated.View>
 
