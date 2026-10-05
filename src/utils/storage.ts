@@ -9,6 +9,7 @@ const ACTIVITY_ATTEMPTS_KEY = '@ethicore_activity_attempts';
 const DATA_VERSION_KEY = '@ethicore_data_version';
 const COMPLETION_MODAL_KEY = '@ethicore_completion_modal_dismissed';
 const TOPIC_NOTES_KEY = '@ethicore_topic_notes';
+const TOPIC_HIGHLIGHTS_KEY = '@ethicore_topic_highlights';
 
 // Increment when course structure changes (questions added/removed, etc)
 const CURRENT_DATA_VERSION = 8;
@@ -252,6 +253,92 @@ export interface TopicNote {
   title: string;
   content: string;
 }
+
+export interface TopicHighlight {
+  word: string;
+  note: string;
+  anchor?: string;
+  color?: string;
+}
+
+export const loadTopicHighlights = async (chapterId: number, topicId: string): Promise<TopicHighlight[]> => {
+  try {
+    const data = await AsyncStorage.getItem(TOPIC_HIGHLIGHTS_KEY);
+    const highlightsByTopic: Record<string, TopicHighlight[]> = data ? JSON.parse(data) : {};
+    const highlights = highlightsByTopic[`${chapterId}:${topicId}`];
+    return Array.isArray(highlights)
+      ? highlights.filter((item): item is TopicHighlight => Boolean(item && typeof item.word === 'string' && typeof item.note === 'string' && (item.anchor === undefined || typeof item.anchor === 'string') && (item.color === undefined || typeof item.color === 'string')))
+      : [];
+  } catch (error) {
+    console.error('Error loading topic highlights:', error);
+    return [];
+  }
+};
+
+export const saveTopicHighlight = async (
+  chapterId: number,
+  topicId: string,
+  word: string,
+  note = '',
+  anchor?: string,
+  color?: string,
+): Promise<TopicHighlight[]> => {
+  try {
+    const data = await AsyncStorage.getItem(TOPIC_HIGHLIGHTS_KEY);
+    const highlightsByTopic: Record<string, TopicHighlight[]> = data ? JSON.parse(data) : {};
+    const key = `${chapterId}:${topicId}`;
+    const highlights = Array.isArray(highlightsByTopic[key]) ? highlightsByTopic[key] : [];
+    const normalizedWord = word.trim();
+    if (!normalizedWord) return highlights;
+
+    const existingIndex = highlights.findIndex((item) => anchor
+      ? item.anchor === anchor || (!item.anchor && item.word.toLowerCase() === normalizedWord.toLowerCase())
+      : item.word.toLowerCase() === normalizedWord.toLowerCase());
+    const existingHighlight = existingIndex >= 0 ? highlights[existingIndex] : undefined;
+    const highlight = {
+      word: normalizedWord,
+      note: note.trim(),
+      ...(anchor ? { anchor } : {}),
+      ...(color || existingHighlight?.color ? { color: color || existingHighlight?.color } : {}),
+    };
+    if (existingIndex >= 0) {
+      highlights[existingIndex] = highlight;
+    } else {
+      highlights.push(highlight);
+    }
+
+    highlightsByTopic[key] = highlights;
+    await AsyncStorage.setItem(TOPIC_HIGHLIGHTS_KEY, JSON.stringify(highlightsByTopic));
+    return highlights;
+  } catch (error) {
+    console.error('Error saving topic highlight:', error);
+    return [];
+  }
+};
+
+export const deleteTopicHighlight = async (chapterId: number, topicId: string, word: string, anchor?: string): Promise<TopicHighlight[]> => {
+  try {
+    const data = await AsyncStorage.getItem(TOPIC_HIGHLIGHTS_KEY);
+    const highlightsByTopic: Record<string, TopicHighlight[]> = data ? JSON.parse(data) : {};
+    const key = `${chapterId}:${topicId}`;
+    const highlights = Array.isArray(highlightsByTopic[key]) ? highlightsByTopic[key] : [];
+    const remaining = highlights.filter((item) => anchor
+      ? item.anchor !== anchor
+      : item.word.toLowerCase() !== word.trim().toLowerCase());
+
+    if (remaining.length > 0) {
+      highlightsByTopic[key] = remaining;
+    } else {
+      delete highlightsByTopic[key];
+    }
+
+    await AsyncStorage.setItem(TOPIC_HIGHLIGHTS_KEY, JSON.stringify(highlightsByTopic));
+    return remaining;
+  } catch (error) {
+    console.error('Error deleting topic highlight:', error);
+    return [];
+  }
+};
 
 export const saveTopicNote = async (chapterId: number, topicId: string, title: string, content: string): Promise<void> => {
   try {

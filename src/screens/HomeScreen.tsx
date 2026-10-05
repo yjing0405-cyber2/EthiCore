@@ -216,13 +216,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const completedTopics = useMemo(() => chapters.reduce((acc, ch) => acc + ch.topics.filter(t => t.completed).length, 0), [chapters]);
   const totalTopics = useMemo(() => chapters.reduce((acc, ch) => acc + ch.topics.length, 0), [chapters]);
-  const attemptedQuizzes = useMemo(() => chapters.filter(ch => ch.quizCompleted || (ch.quizAttempts ?? 0) > 0).length, [chapters]);
+  const passedQuizzes = useMemo(() => chapters.filter(ch => ch.quizCompleted && (ch.highestQuizScore ?? 0) >= 75).length, [chapters]);
   const totalQuizzes = chapters.length;
   const clampedChapterScores = chapters.map(ch => Math.min(100, Math.max(0, ch.highestQuizScore ?? 0)));
   const bestScore = clampedChapterScores.length > 0 ? Math.max(...clampedChapterScores) : 0;
 
   const learningPercentage = totalTopics > 0 ? Math.min(100, Math.max(0, Math.round((completedTopics / totalTopics) * 100))) : 0;
-  const quizPercentage = progress.quizProgress ?? (totalQuizzes > 0 ? Math.round((attemptedQuizzes / totalQuizzes) * 100) : 0);
+  const quizPercentage = progress.quizProgress ?? (totalQuizzes > 0 ? Math.round((passedQuizzes / totalQuizzes) * 100) : 0);
   const activitiesPercentage = progress.activityProgress ?? 0;
   const displayOverallProgress = progress.overallProgress;
 
@@ -311,15 +311,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     const completedAllLearning = completedTopics === totalTopics && totalTopics > 0;
-    const attemptedAllQuizzes = attemptedQuizzes === totalQuizzes && totalQuizzes > 0;
+    const passedAllQuizzes = passedQuizzes === totalQuizzes && totalQuizzes > 0;
     const hasActivities = chapters.some(ch => ch.topics.some(topic => topic.activity));
     const completedActivities = !hasActivities || (progress.activityProgress ?? 0) >= 100;
-    const courseCompleted = completedAllLearning && attemptedAllQuizzes && completedActivities;
+    const courseCompleted = completedAllLearning && passedAllQuizzes && completedActivities;
     (async () => {
       const modalDismissed = await loadCompletionModalDismissed();
       if (courseCompleted && !showCompletionModal && !modalDismissed) setShowCompletionModal(true);
     })();
-  }, [completedTopics, totalTopics, attemptedQuizzes, totalQuizzes, chapters, progress.activityProgress, showCompletionModal]);
+  }, [completedTopics, totalTopics, passedQuizzes, totalQuizzes, chapters, progress.activityProgress, showCompletionModal]);
 
   const currentQuote = quoteSlides[quoteIndex];
 

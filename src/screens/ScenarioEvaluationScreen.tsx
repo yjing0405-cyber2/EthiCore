@@ -122,6 +122,9 @@ const ScenarioEvaluationScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const { decision, scenario } = route.params || {};
   const { isOnline, isLoading } = useNetworkStatus();
+  const scenarioTitle = sanitizeDisplayText(scenario?.title);
+  const scenarioSetup = sanitizeDisplayText(scenario?.scenarioSetup);
+  const scenarioBody = scenarioSetup.toLowerCase() === scenarioTitle.toLowerCase() ? '' : scenarioSetup;
 
   const chapterNumber = Number(scenario?.chapter ?? scenario?.chapterId ?? scenario?.additionalNotes?.chapter ?? 0);
   const accent = chapterAccentMap[chapterNumber as keyof typeof chapterAccentMap] ?? chapterAccentMap[1];
@@ -850,6 +853,17 @@ const ScenarioEvaluationScreen: React.FC = () => {
           </View>
         </View>
 
+        {scenarioTitle || scenarioSetup ? (
+          <View style={[styles.scenarioCard, { borderColor: `${accent.accent}35`, borderLeftColor: accent.accent }]}>
+            <Text style={styles.scenarioTitle}>
+              {scenarioTitle || 'Scenario'}
+            </Text>
+            {scenarioBody ? (
+              <Text style={styles.scenarioBody}>{scenarioBody}</Text>
+            ) : null}
+          </View>
+        ) : null}
+
         {/* AI result */}
         <View style={[styles.headerBadge, { backgroundColor: evaluationResult ? (isUnethical ? '#FEE2E2' : '#DCFCE7') : '#E2E8F0' }]}>
           {evaluationResult ? (
@@ -1000,6 +1014,37 @@ const styles = StyleSheet.create({
   heroSubtitle: { fontSize: 13.5, color: '#64748B', lineHeight: 20, marginBottom: 14 },
   progressRow: { flexDirection: 'row', gap: 6, marginTop: 4 },
   progressDot: { height: 6, borderRadius: 3 },
+  scenarioCard: {
+    marginBottom: 16,
+    paddingVertical: 15,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderLeftWidth: 4,
+    borderColor: '#CBD5E1',
+    backgroundColor: '#FFFFFF',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#0F172A',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 5,
+      },
+      android: { elevation: 1 },
+    }),
+  },
+  scenarioTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#0F172A',
+    lineHeight: 24,
+  },
+  scenarioBody: {
+    marginTop: 8,
+    fontSize: 14,
+    lineHeight: 21,
+    color: '#334155',
+  },
   resultTitle: { textAlign: 'center', fontSize: 20, fontWeight: '700', marginBottom: 4 },
   resultSubtitle: { textAlign: 'center', color: '#64748B', marginBottom: 12 },
   decisionCard: { backgroundColor: Platform.OS === 'ios' ? 'rgba(255,255,255,0.88)' : '#fff', padding: 12, borderRadius: 10, marginBottom: 12, borderWidth: Platform.OS === 'ios' ? 0 : 1, borderColor: Platform.OS === 'ios' ? 'transparent' : '#E6EEF9', overflow: 'hidden' },

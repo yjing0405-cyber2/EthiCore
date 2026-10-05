@@ -238,7 +238,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
         completedChapters++;
       }
 
-      if (chapter.quizCompleted || (chapter.quizAttempts ?? 0) > 0) {
+      if (chapter.quizCompleted && (chapter.highestQuizScore ?? 0) >= 75) {
         quizCompletedCount++;
       }
 
@@ -250,7 +250,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
       });
     });
 
-    // Quiz progress is percent of chapters with a quiz attempt or pass recorded
+    // Quiz progress is percent of chapters passed.
     const quizProgress = currentChapters.length > 0 ? Math.round((quizCompletedCount / currentChapters.length) * 100) : 0;
 
     // Learning progress: percent of topics completed by learning

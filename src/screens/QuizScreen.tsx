@@ -585,7 +585,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({ navigation, route }) => {
             </View>
 
             {/* Best Score Card */}
-            {chapter.quizCompleted && (
+            {(chapter.quizAttempts ?? 0) > 0 && (
               <View style={styles.scoreHistoryCard}>
                 <View style={styles.scoreHistoryHeader}>
                   <Ionicons name="trophy-outline" size={16} color="#F59E0B" />
@@ -689,11 +689,6 @@ const QuizScreen: React.FC<QuizScreenProps> = ({ navigation, route }) => {
                       <Text style={[styles.optionText, isSelected && styles.optionTextSelected, isSelected && { color: accentMain }]}> 
                         {option}
                       </Text>
-                      {isSelected && (
-                        <View style={styles.optionCheck}>
-                          <Ionicons name="checkmark-circle-outline" size={22} color={accentMain} />
-                        </View>
-                      )}
                     </TouchableOpacity>
                   );
                 })}
@@ -1173,9 +1168,6 @@ const styles = StyleSheet.create({
   optionTextSelected: {
     color: COLORS.primary,
     fontWeight: '600',
-  },
-  optionCheck: {
-    marginLeft: 8,
   },
 
   // ── Footer ──

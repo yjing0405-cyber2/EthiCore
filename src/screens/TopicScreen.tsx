@@ -6,7 +6,7 @@ import { RouteProp, ParamListBase } from '@react-navigation/native';
 import { Ionicons } from '../components/Ionicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useProgress } from '../context/ProgressContext';
-import { deleteTopicNote, loadTopicNotes, replaceTopicNotes, saveTopicNote, updateTopicNote, type TopicNote } from '../utils/storage';
+import { deleteTopicHighlight, deleteTopicNote, loadTopicHighlights, loadTopicNotes, replaceTopicNotes, saveTopicHighlight, saveTopicNote, updateTopicNote, type TopicHighlight, type TopicNote } from '../utils/storage';
 import type { Chapter, Topic } from '../types';
 
 type TopicRouteParams = {
@@ -376,17 +376,68 @@ const TERM_DEFINITION_REGEX = new RegExp(
   'gi'
 );
 
+const DEFAULT_HIGHLIGHT_COLOR = '#FDE047';
+const SEARCH_RESULTS_PER_PAGE = 3;
+const HIGHLIGHT_COLOR_OPTIONS = [
+  { label: 'Yellow', value: '#FDE047' },
+  { label: 'Green', value: '#86EFAC' },
+  { label: 'Blue', value: '#7DD3FC' },
+  { label: 'Pink', value: '#F9A8D4' },
+  { label: 'Orange', value: '#FDBA74' },
+] as const;
+
 const renderTextWithDefinitionSpans = (
   text: string,
   keyPrefix: string,
   style?: any,
-  onSelectDefinition?: (term: string) => void,
+  onSelectDefinition?: (term: string, anchor?: string) => void,
   highlightTerm?: string,
-  onLongPressText?: (text: string) => void,
-  allowLongPress = false,
+  highlightedWords: Set<string> = new Set(),
+  highlightColors: Record<string, string> = {},
+  onLongPressWord?: (word: string, anchor: string) => void,
+  onPressHighlightedWord?: (word: string, anchor: string) => void,
 ): React.ReactNode[] => {
+  const renderWords = (value: string, prefix: string): React.ReactNode[] => {
+    const parts: React.ReactNode[] = [];
+    const tokens = value.split(/(\s+)/);
+
+    tokens.forEach((token, index) => {
+      if (!token) return;
+      if (/^\s+$/.test(token)) {
+        parts.push(token);
+        return;
+      }
+
+      const match = token.match(/^([^A-Za-z0-9]*)([A-Za-z0-9][A-Za-z0-9'’\-]*)([^A-Za-z0-9]*)$/);
+      if (!match) {
+        parts.push(token);
+        return;
+      }
+
+      const [, leading, word, trailing] = match;
+      const anchor = `${prefix}-word-${index}`;
+      const isHighlighted = highlightedWords.has(anchor) || highlightedWords.has(word.toLowerCase());
+      const highlightColor = highlightColors[anchor] || highlightColors[word.toLowerCase()] || DEFAULT_HIGHLIGHT_COLOR;
+      const isSearchMatch = Boolean(highlightTerm?.trim() && word.toLowerCase().includes(highlightTerm.trim().toLowerCase()));
+      parts.push(leading);
+      parts.push(
+        <Text
+          key={`${prefix}-word-${index}`}
+          style={[style, isHighlighted && styles.savedWordHighlight, isHighlighted && { backgroundColor: highlightColor }, isSearchMatch && styles.jumpHighlightText]}
+          onLongPress={() => onLongPressWord?.(word, anchor)}
+          onPress={isHighlighted ? () => onPressHighlightedWord?.(word, anchor) : undefined}
+        >
+          {word}
+        </Text>,
+      );
+      parts.push(trailing);
+    });
+
+    return parts;
+  };
+
   if (!onSelectDefinition || Object.keys(TERM_DEFINITIONS).length === 0) {
-    return renderHighlightedText(text, style, highlightTerm, `${keyPrefix}-text`, onLongPressText, allowLongPress);
+    return renderWords(text, `${keyPrefix}-text`);
   }
 
   const parts: React.ReactNode[] = [];
@@ -396,27 +447,21 @@ const renderTextWithDefinitionSpans = (
 
   while ((match = TERM_DEFINITION_REGEX.exec(text)) !== null) {
     if (match.index > lastIndex) {
-        parts.push(
-          ...renderHighlightedText(
-            text.slice(lastIndex, match.index),
-            style,
-            highlightTerm,
-            `${keyPrefix}-plain-${lastIndex}`,
-            onLongPressText,
-            false,
-          ),
-        );
+      parts.push(...renderWords(text.slice(lastIndex, match.index), `${keyPrefix}-plain-${lastIndex}`));
     }
 
     const matchedText = match[0];
     const normalizedTerm = matchedText.toLowerCase();
+    const anchor = `${keyPrefix}-term-${match.index}`;
+    const isHighlighted = highlightedWords.has(anchor) || highlightedWords.has(normalizedTerm);
+    const highlightColor = highlightColors[anchor] || highlightColors[normalizedTerm] || DEFAULT_HIGHLIGHT_COLOR;
 
     parts.push(
       <Text
         key={`${keyPrefix}-term-${match.index}`}
-        style={[style, styles.definitionTerm]}
-        onPress={() => onSelectDefinition(normalizedTerm)}
-        onLongPress={allowLongPress ? () => onLongPressText?.(matchedText) : undefined}
+        style={[style, styles.definitionTerm, isHighlighted && styles.savedWordHighlight, isHighlighted && { backgroundColor: highlightColor }]}
+        onPress={() => onSelectDefinition(normalizedTerm, anchor)}
+        onLongPress={() => onLongPressWord?.(matchedText, anchor)}
       >
         {matchedText}
       </Text>
@@ -426,14 +471,7 @@ const renderTextWithDefinitionSpans = (
   }
 
   if (lastIndex < text.length) {
-    parts.push(
-      ...renderHighlightedText(
-        text.slice(lastIndex),
-        style,
-        highlightTerm,
-        `${keyPrefix}-plain-${lastIndex}`,
-      ),
-    );
+    parts.push(...renderWords(text.slice(lastIndex), `${keyPrefix}-plain-${lastIndex}`));
   }
 
   return parts.length > 0 ? parts : [<Text key={`${keyPrefix}-text`} style={style}>{text}</Text>];
@@ -3152,9 +3190,12 @@ const parseContent = (content: string): ParsedElement[] => {
 const renderFormattedText = (
   text: string,
   keyPrefix: string,
-  onSelectDefinition?: (term: string) => void,
+  onSelectDefinition?: (term: string, anchor?: string) => void,
   highlightTerm?: string,
-  onLongPressText?: (text: string) => void,
+  highlightedWords: Set<string> = new Set(),
+  highlightColors: Record<string, string> = {},
+  onLongPressWord?: (word: string, anchor: string) => void,
+  onPressHighlightedWord?: (word: string, anchor: string) => void,
 ): React.ReactNode => {
   const parts: React.ReactNode[] = [];
   let idx = 0;
@@ -3175,8 +3216,10 @@ const renderFormattedText = (
             undefined,
             onSelectDefinition,
             highlightTerm,
-            onLongPressText,
-            false,
+            highlightedWords,
+            highlightColors,
+            onLongPressWord,
+            onPressHighlightedWord,
           )
         );
       }
@@ -3196,8 +3239,10 @@ const renderFormattedText = (
         formattedStyle,
         onSelectDefinition,
         highlightTerm,
-        onLongPressText,
-        true,
+        highlightedWords,
+        highlightColors,
+        onLongPressWord,
+        onPressHighlightedWord,
       )
     );
 
@@ -3214,8 +3259,10 @@ const renderFormattedText = (
           undefined,
           onSelectDefinition,
           highlightTerm,
-          onLongPressText,
-          false,
+          highlightedWords,
+          highlightColors,
+          onLongPressWord,
+          onPressHighlightedWord,
         )
       );
     }
@@ -3308,6 +3355,11 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteText, setNoteText] = useState('');
   const [savedNotes, setSavedNotes] = useState<TopicNote[]>([]);
+  const [topicHighlights, setTopicHighlights] = useState<TopicHighlight[]>([]);
+  const [selectedWord, setSelectedWord] = useState('');
+  const [selectedWordAnchor, setSelectedWordAnchor] = useState('');
+  const [wordNoteDraft, setWordNoteDraft] = useState('');
+  const [wordHighlightColorDraft, setWordHighlightColorDraft] = useState(DEFAULT_HIGHLIGHT_COLOR);
   const [editingNoteIndex, setEditingNoteIndex] = useState<number | null>(null);
   const [noteLoaded, setNoteLoaded] = useState(false);
   const [notesModalVisible, setNotesModalVisible] = useState(false);
@@ -3320,7 +3372,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
   const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [topicSearchQuery, setTopicSearchQuery] = useState('');
-  const [showAllSearchResults, setShowAllSearchResults] = useState(false);
+  const [searchResultPage, setSearchResultPage] = useState(0);
   const [topicDropdownOpen, setTopicDropdownOpen] = useState(false);
   const contentLayoutMapRef = useRef<Record<string, number>>({});
   const [searchJumpTarget, setSearchJumpTarget] = useState<{
@@ -3331,6 +3383,18 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
   const [lastSaved, setLastSaved] = useState<string | null>(null);
   const [definitionModalVisible, setDefinitionModalVisible] = useState(false);
   const [selectedDefinitionKey, setSelectedDefinitionKey] = useState<string | null>(null);
+  const highlightedWords = useMemo(
+    () => new Set(topicHighlights.flatMap((highlight) => highlight.anchor ? [highlight.anchor] : [highlight.word.toLowerCase()])),
+    [topicHighlights],
+  );
+  const highlightColors = useMemo(() => {
+    const colors: Record<string, string> = {};
+    topicHighlights.forEach((highlight) => {
+      const color = highlight.color || DEFAULT_HIGHLIGHT_COLOR;
+      colors[highlight.anchor || highlight.word.toLowerCase()] = color;
+    });
+    return colors;
+  }, [topicHighlights]);
 
   const topicDropdownOptions = useMemo(() => {
     const currentChapterOptions: Array<{ chapterId: number; chapterTitle: string; topicId: string; title: string }> = [];
@@ -3422,11 +3486,76 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
   const currentActivityPassed = Boolean(topic?.completed);
   const isLastContentPage = contentPages.length <= 1 || contentPageIndex >= contentPages.length - 1;
   const selectedDefinition = selectedDefinitionKey ? TERM_DEFINITIONS[selectedDefinitionKey] : null;
+  const selectedWordHighlight = topicHighlights.find(
+    (highlight) => highlight.anchor === selectedWordAnchor || (!highlight.anchor && highlight.word.toLowerCase() === selectedWord.toLowerCase()),
+  );
+  const selectedHighlightColor = wordHighlightColorDraft;
 
-  const openDefinitionModal = useCallback((termKey: string) => {
+  const openDefinitionModal = useCallback((termKey: string, anchor?: string) => {
     setSelectedDefinitionKey(termKey);
+    const definition = TERM_DEFINITIONS[termKey];
+    const word = definition?.title || termKey;
+    const highlight = topicHighlights.find((item) => anchor
+      ? item.anchor === anchor || (!item.anchor && item.word.toLowerCase() === word.toLowerCase())
+      : item.word.toLowerCase() === word.toLowerCase());
+    setSelectedWord(word);
+    setSelectedWordAnchor(anchor || highlight?.anchor || '');
+    setWordNoteDraft(highlight?.note || '');
+    setWordHighlightColorDraft(highlight?.color || DEFAULT_HIGHLIGHT_COLOR);
     setDefinitionModalVisible(true);
+  }, [topicHighlights]);
+
+  const handleLongPressWord = useCallback(async (word: string, anchor: string) => {
+    const normalizedWord = word.trim();
+    if (!normalizedWord) return;
+
+    const existingHighlight = topicHighlights.find((highlight) =>
+      highlight.anchor === anchor || (!highlight.anchor && highlight.word.toLowerCase() === normalizedWord.toLowerCase()),
+    );
+    setSelectedWord(normalizedWord);
+    setSelectedWordAnchor(anchor);
+    setSelectedDefinitionKey(normalizedWord.toLowerCase());
+    setWordNoteDraft(existingHighlight?.note || '');
+    setWordHighlightColorDraft(existingHighlight?.color || DEFAULT_HIGHLIGHT_COLOR);
+    setDefinitionModalVisible(true);
+  }, [topicHighlights]);
+
+  const handlePressHighlightedWord = useCallback((word: string, anchor: string) => {
+    const normalizedWord = word.trim();
+    const highlight = topicHighlights.find(
+      (item) => item.anchor === anchor || (!item.anchor && item.word.toLowerCase() === normalizedWord.toLowerCase()),
+    );
+    setSelectedWord(normalizedWord);
+    setSelectedWordAnchor(anchor);
+    setSelectedDefinitionKey(normalizedWord.toLowerCase());
+    setWordNoteDraft(highlight?.note || '');
+    setWordHighlightColorDraft(highlight?.color || DEFAULT_HIGHLIGHT_COLOR);
+    setDefinitionModalVisible(true);
+  }, [topicHighlights]);
+
+  const handleSelectHighlightColor = useCallback((color: string) => {
+    setWordHighlightColorDraft(color);
   }, []);
+
+  const handleSaveWordNote = useCallback(async () => {
+    if (!selectedWord.trim()) return;
+    const updatedHighlights = await saveTopicHighlight(
+      chapterId,
+      topicId,
+      selectedWord,
+      wordNoteDraft,
+      selectedWordAnchor,
+      wordHighlightColorDraft,
+    );
+    setTopicHighlights(updatedHighlights);
+  }, [chapterId, topicId, selectedWord, selectedWordAnchor, wordNoteDraft, wordHighlightColorDraft]);
+
+  const handleRemoveWordHighlight = useCallback(async () => {
+    if (!selectedWordHighlight) return;
+    const updatedHighlights = await deleteTopicHighlight(chapterId, topicId, selectedWord, selectedWordAnchor);
+    setTopicHighlights(updatedHighlights);
+    setDefinitionModalVisible(false);
+  }, [chapterId, topicId, selectedWord, selectedWordAnchor, selectedWordHighlight]);
 
   const openSummaryModal = useCallback((title: string, content?: string) => {
     const normalizedTitle = formatDisplayText(title).trim();
@@ -3518,11 +3647,14 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
     setViewingNote(null);
     setIsCreating(false);
     setSearchQuery('');
+    setTopicHighlights([]);
 
     const loadNotes = async () => {
       const loadedNotes = await loadTopicNotes(chapterId, topicId);
+      const loadedHighlights = await loadTopicHighlights(chapterId, topicId);
       if (isMounted) {
         setSavedNotes(loadedNotes);
+        setTopicHighlights(loadedHighlights);
         setNoteLoaded(true);
       }
     };
@@ -3549,7 +3681,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
 
   const contentSearchResults = useMemo(() => {
     const term = topicSearchQuery.trim().toLowerCase();
-    if (!term || !chapters.length) return [];
+    if (!term || !chapter) return [];
 
     interface SearchResult {
       chapterId: number;
@@ -3567,95 +3699,43 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
 
     const results: SearchResult[] = [];
 
-    for (const ch of chapters) {
-      for (const t of ch.topics) {
-        const titleLower = t.title.toLowerCase();
-        const normalizedContent = normalizeSearchText(t.content || '');
-        const contentLower = normalizedContent.toLowerCase();
-        const topicLocked = Boolean(t.locked);
+    for (const searchedTopic of chapter.topics) {
+      const pages = splitContentIntoPages(searchedTopic.content || '');
+      const titleMatch = normalizeSearchText(searchedTopic.title).toLowerCase().includes(term);
+      let matchPageIndex = 0;
+      let excerpt = titleMatch
+        ? getContentSearchExcerpts(searchedTopic.title, term)[0] || searchedTopic.title
+        : '';
 
-        // Check 1: Title match
-        if (titleLower.includes(term)) {
-          const pages = splitContentIntoPages(t.content || '');
-          results.push({
-            chapterId: ch.id,
-            topicId: t.id,
-            topicTitle: t.title,
-            chapterTitle: ch.title || `Chapter ${ch.id}`,
-            pageIndex: 0,
-            pageNumber: 1,
-            pageCount: pages.length || 1,
-            excerpt: getContentSearchExcerpt(t.content || '', term),
-            matchType: 'title',
-            locked: topicLocked,
-          });
-          continue; // Don't duplicate if title already matched
-        }
-
-        // Check 2: Heading match (lines wrapped in ** **)
-        const headingMatches = Array.from(
-          (t.content || '').matchAll(/\*\*([^*]+)\*\*/g)
-        );
-        let headingMatched = false;
-        for (const hm of headingMatches) {
-          const normalizedHeading = normalizeSearchText(hm[1]);
-          if (normalizedHeading.toLowerCase().includes(term)) {
-            const pages = splitContentIntoPages(t.content || '');
-            // Find which page contains this heading
-            let pageIdx = 0;
-            for (let i = 0; i < pages.length; i++) {
-              if (normalizeSearchText(pages[i]).toLowerCase().includes(normalizedHeading.toLowerCase())) {
-                pageIdx = i;
-                break;
-              }
-            }
-            results.push({
-              chapterId: ch.id,
-              topicId: t.id,
-              topicTitle: t.title,
-              chapterTitle: ch.title || `Chapter ${ch.id}`,
-              pageIndex: pageIdx,
-              pageNumber: pageIdx + 1,
-              pageCount: pages.length || 1,
-              excerpt: getContentSearchExcerpt(t.content || '', term),
-              matchType: 'heading',
-              matchedHeading: normalizedHeading,
-              locked: topicLocked,
-            });
-            headingMatched = true;
-            break;
-          }
-        }
-        if (headingMatched) continue;
-
-        // Check 3: Content body match
-        if (contentLower.includes(term)) {
-          const pages = splitContentIntoPages(t.content || '');
-          let pageIdx = 0;
-          for (let i = 0; i < pages.length; i++) {
-            if (pages[i].toLowerCase().includes(term)) {
-              pageIdx = i;
-              break;
-            }
-          }
-          results.push({
-            chapterId: ch.id,
-            topicId: t.id,
-            topicTitle: t.title,
-            chapterTitle: ch.title || `Chapter ${ch.id}`,
-            pageIndex: pageIdx,
-            pageNumber: pageIdx + 1,
-            pageCount: pages.length || 1,
-            excerpt: getContentSearchExcerpt(t.content || '', term),
-            matchType: 'content',
-            locked: topicLocked,
-          });
-        }
+      if (!titleMatch) {
+        const matchedPageIndex = pages.findIndex((page) => getContentSearchExcerpts(page, term).length > 0);
+        if (matchedPageIndex < 0) continue;
+        matchPageIndex = matchedPageIndex;
+        excerpt = getContentSearchExcerpts(pages[matchedPageIndex], term)[0];
       }
+
+      results.push({
+        chapterId: chapter.id,
+        topicId: searchedTopic.id,
+        topicTitle: searchedTopic.title,
+        chapterTitle: chapter.title || `Chapter ${chapter.id}`,
+        pageIndex: matchPageIndex,
+        pageNumber: matchPageIndex + 1,
+        pageCount: pages.length || 1,
+        excerpt,
+        matchType: titleMatch ? 'title' : 'content',
+        locked: Boolean(searchedTopic.locked),
+      });
     }
 
     return results;
-  }, [chapters, topicSearchQuery]);
+  }, [chapter, topicSearchQuery]);
+
+  const totalSearchResultPages = Math.ceil(contentSearchResults.length / SEARCH_RESULTS_PER_PAGE);
+  const paginatedSearchResults = contentSearchResults.slice(
+    searchResultPage * SEARCH_RESULTS_PER_PAGE,
+    (searchResultPage + 1) * SEARCH_RESULTS_PER_PAGE,
+  );
 
   const triggerAutoSave = useCallback(() => {
     setIsAutoSaving(true);
@@ -3950,6 +4030,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
   const renderParsedContent = useCallback((elements: ParsedElement[]) => {
     return elements.map((el, idx) => {
       const key = `${topicPrefix}-el-${idx}`;
+      const annotationKey = `${key}-page-${contentPageIndex}`;
 
       switch (el.type) {
         case 'heading1':
@@ -3982,18 +4063,20 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
           return (
             <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)}>
               <Text style={styles.contentText}>
-                {renderFormattedText(stripMarkdownFormatting(el.content || ''), key, openDefinitionModal, topicSearchQuery, openSummaryModal)}
+                {renderFormattedText(stripMarkdownFormatting(el.content || ''), annotationKey, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord)}
               </Text>
             </View>
           );
 
         case 'bullet':
           return (
-            <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)} style={styles.listItem}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.listText}>
-                {renderFormattedText(stripMarkdownFormatting(el.content || ''), key, openDefinitionModal, topicSearchQuery, openSummaryModal)}
-              </Text>
+            <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)}>
+              <View style={styles.listItem}>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.listText}>
+                  {renderFormattedText(stripMarkdownFormatting(el.content || ''), annotationKey, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord)}
+                </Text>
+              </View>
             </View>
           );
 
@@ -4001,11 +4084,13 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
           return (
             <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)}>
               {(el.items && el.items.length > 0 ? el.items : [{ num: el.content, text: el.content || '' }]).map((item, itemIndex) => (
-                <View key={`${key}-item-${itemIndex}`} style={[styles.listItem, styles.numberedListItem]}>
-                  <Text style={styles.numberBullet}>{item.num ?? `${itemIndex + 1}`}</Text>
-                  <Text style={styles.listText}>
-                    {renderFormattedText(stripMarkdownFormatting(item.text), `${key}-item-${itemIndex}`, openDefinitionModal, topicSearchQuery, openSummaryModal)}
-                  </Text>
+                <View key={`${key}-item-${itemIndex}`}>
+                  <View style={[styles.listItem, styles.numberedListItem]}>
+                    <Text style={styles.numberBullet}>{item.num ?? `${itemIndex + 1}`}</Text>
+                    <Text style={styles.listText}>
+                      {renderFormattedText(stripMarkdownFormatting(item.text), `${annotationKey}-item-${itemIndex}`, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord)}
+                    </Text>
+                  </View>
                 </View>
               ))}
             </View>
@@ -4024,7 +4109,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
         case 'quote':
           return (
             <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)} style={styles.quoteBox}>
-              <Text style={styles.quoteText}>{renderFormattedText(stripMarkdownFormatting(el.content || ''), key, openDefinitionModal, topicSearchQuery, openSummaryModal)}</Text>
+              <Text style={styles.quoteText}>{renderFormattedText(stripMarkdownFormatting(el.content || ''), annotationKey, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord)}</Text>
             </View>
           );
 
@@ -4071,9 +4156,11 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
           return (
             <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)} style={styles.redBox}>
               {el.items?.map((item, sIdx) => (
-                <View key={`${key}-sec-${sIdx}`} style={styles.listItem}>
-                  <Text style={styles.numberBullet}>{item.num}</Text>
-                  <Text style={styles.listText}>{renderFormattedText(stripMarkdownFormatting(item.text), `${key}-sec-${sIdx}`, openDefinitionModal, topicSearchQuery, openSummaryModal)}</Text>
+                <View key={`${key}-sec-${sIdx}`}>
+                  <View style={styles.listItem}>
+                    <Text style={styles.numberBullet}>{item.num}</Text>
+                    <Text style={styles.listText}>{renderFormattedText(stripMarkdownFormatting(item.text), `${annotationKey}-sec-${sIdx}`, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord)}</Text>
+                  </View>
                 </View>
               ))}
             </View>
@@ -4083,11 +4170,13 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
           return (
             <View key={key} onLayout={(e) => handleContentBlockLayout(key, e.nativeEvent.layout.y)} style={styles.redBox}>
               {el.items?.map((item, pIdx) => (
-                <View key={`${key}-par-${pIdx}`} style={styles.listItem}>
-                  {item.num && <Text style={styles.numberBullet}>({item.num})</Text>}
-                  <Text style={styles.listText}>
-                    {renderFormattedText(stripMarkdownFormatting(item.text), `${key}-par-${pIdx}`, openDefinitionModal, topicSearchQuery, openSummaryModal)}
-                  </Text>
+                <View key={`${key}-par-${pIdx}`}>
+                  <View style={styles.listItem}>
+                    {item.num && <Text style={styles.numberBullet}>({item.num})</Text>}
+                    <Text style={styles.listText}>
+                      {renderFormattedText(stripMarkdownFormatting(item.text), `${annotationKey}-par-${pIdx}`, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord)}
+                    </Text>
+                  </View>
                 </View>
               ))}
             </View>
@@ -4100,7 +4189,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
           return null;
       }
     });
-  }, [topicPrefix]);
+  }, [topicPrefix, contentPageIndex, handleContentBlockLayout, openDefinitionModal, topicSearchQuery, highlightedWords, highlightColors, handleLongPressWord, handlePressHighlightedWord]);
 
   // ─── Early Return for Not Found / Locked Topic ───────────────────────────
 
@@ -4199,7 +4288,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
                 value={topicSearchQuery}
                 onChangeText={(text) => {
                   setTopicSearchQuery(text);
-                  setShowAllSearchResults(false);
+                  setSearchResultPage(0);
                 }}
                 placeholder="Search"
                 placeholderTextColor="#94A3B8"
@@ -4207,7 +4296,13 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
                 autoCorrect={false}
               />
               {topicSearchQuery.length > 0 ? (
-                <TouchableOpacity onPress={() => setTopicSearchQuery('')} hitSlop={8}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setTopicSearchQuery('');
+                    setSearchResultPage(0);
+                  }}
+                  hitSlop={8}
+                >
                   <Ionicons name="close-circle" size={16} color="#94A3B8" />
                 </TouchableOpacity>
               ) : null}
@@ -4219,14 +4314,12 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
                   <Text style={styles.jumpEmptyText}>No matching content found.</Text>
                 ) : (
                   <>
-                    {contentSearchResults
-                      .slice(0, showAllSearchResults ? contentSearchResults.length : 3)
-                      .map((result, resultIndex) => {
+                    {paginatedSearchResults.map((result, resultIndex) => {
                         const isCurrentTopic = result.chapterId === chapterId && result.topicId === topicId;
                         const isLockedResult = result.locked && !isCurrentTopic;
                         return (
                           <TouchableOpacity
-                            key={`search-result-${resultIndex}`}
+                            key={`search-result-${searchResultPage}-${resultIndex}`}
                             style={[
                               styles.jumpResultItem,
                               isCurrentTopic && styles.jumpResultItemCurrent,
@@ -4256,6 +4349,7 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
                                 });
                               }
                               setTopicSearchQuery('');
+                              setSearchResultPage(0);
                             }}
                             activeOpacity={isLockedResult ? 1 : 0.8}
                           >
@@ -4300,17 +4394,30 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
                           </TouchableOpacity>
                         );
                       })}
-
-                    {contentSearchResults.length > 3 ? (
-                      <TouchableOpacity
-                        style={styles.showMoreButton}
-                        onPress={() => setShowAllSearchResults((prev) => !prev)}
-                        activeOpacity={0.8}
-                      >
-                        <Text style={styles.showMoreButtonText}>
-                          {showAllSearchResults ? 'Show less' : `Show ${contentSearchResults.length - 3} more results`}
+                    {totalSearchResultPages > 1 ? (
+                      <View style={styles.searchResultPagination}>
+                        <TouchableOpacity
+                          style={[styles.searchResultPageButton, searchResultPage === 0 && styles.searchResultPageButtonDisabled]}
+                          onPress={() => setSearchResultPage((page) => Math.max(0, page - 1))}
+                          disabled={searchResultPage === 0}
+                          accessibilityLabel="Previous search results"
+                          accessibilityRole="button"
+                        >
+                          <Ionicons name="chevron-back" size={18} color="#334155" />
+                        </TouchableOpacity>
+                        <Text style={styles.searchResultPageLabel}>
+                          Page {searchResultPage + 1} of {totalSearchResultPages}
                         </Text>
-                      </TouchableOpacity>
+                        <TouchableOpacity
+                          style={[styles.searchResultPageButton, searchResultPage >= totalSearchResultPages - 1 && styles.searchResultPageButtonDisabled]}
+                          onPress={() => setSearchResultPage((page) => Math.min(totalSearchResultPages - 1, page + 1))}
+                          disabled={searchResultPage >= totalSearchResultPages - 1}
+                          accessibilityLabel="Next search results"
+                          accessibilityRole="button"
+                        >
+                          <Ionicons name="chevron-forward" size={18} color="#334155" />
+                        </TouchableOpacity>
+                      </View>
                     ) : null}
                   </>
                 )}
@@ -4997,29 +5104,94 @@ const TopicScreen: React.FC<TopicScreenProps> = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={() => setDefinitionModalVisible(false)}>
           <View style={styles.modalOverlay}>
-            <View style={styles.modalCard}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              style={styles.wordModalKeyboard}
+            >
+            <View style={[styles.modalCard, styles.wordDefinitionCard]}>
               <View style={styles.modalHeader}>
                 <View style={styles.modalHeaderLeft}>
                   <View style={styles.modalIconCircle}>
                     <Ionicons name="book" size={20} color="#4338CA" />
                   </View>
                   <View>
-                    <Text style={styles.modalTitle}>{selectedDefinition?.title || 'Definition'}</Text>
+                    <Text style={styles.modalTitle}>{selectedDefinition?.title || selectedWord || 'Definition'}</Text>
                   </View>
                 </View>
+                <TouchableOpacity
+                  style={styles.modalCloseButton}
+                  onPress={() => setDefinitionModalVisible(false)}
+                  accessibilityLabel="Close definition"
+                >
+                  <Ionicons name="close" size={20} color="#64748B" />
+                </TouchableOpacity>
               </View>
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <Text style={styles.summaryText}>
-                  {selectedDefinition?.description || 'No definition available for this term yet.'}
-                </Text>
-              </ScrollView>
-              <TouchableOpacity
-                style={styles.modalDoneButton}
-                onPress={() => setDefinitionModalVisible(false)}
+              <ScrollView
+                style={styles.wordModalBody}
+                contentContainerStyle={styles.wordModalBodyContent}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
               >
-                <Text style={styles.modalDoneButtonText}>Close</Text>
-              </TouchableOpacity>
+                <Text style={styles.summaryText}>
+                  {selectedDefinition?.description || 'No glossary definition is available for this word yet.'}
+                </Text>
+                <Text style={styles.wordNoteLabel}>Highlight color</Text>
+                <View style={styles.wordHighlightSwatches}>
+                  {HIGHLIGHT_COLOR_OPTIONS.map((option) => {
+                    const isSelected = selectedHighlightColor === option.value;
+                    return (
+                      <TouchableOpacity
+                        key={option.value}
+                        style={[
+                          styles.wordHighlightSwatch,
+                          { backgroundColor: option.value },
+                          isSelected && styles.wordHighlightSwatchSelected,
+                        ]}
+                        onPress={() => handleSelectHighlightColor(option.value)}
+                        accessibilityLabel={`${option.label} highlight color`}
+                        accessibilityState={{ selected: isSelected }}
+                      >
+                        {isSelected ? <Ionicons name="checkmark" size={17} color="#0F172A" /> : null}
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+                <Text style={styles.wordNoteLabel}>Your note</Text>
+                <TextInput
+                  style={styles.wordNoteInput}
+                  value={wordNoteDraft}
+                  onChangeText={setWordNoteDraft}
+                  placeholder="Add a note about this word..."
+                  placeholderTextColor="#94A3B8"
+                  multiline
+                  textAlignVertical="top"
+                  maxLength={1000}
+                />
+                {selectedWordHighlight?.note ? (
+                  <View style={styles.savedWordNote}>
+                    <Text style={styles.savedWordNoteLabel}>Saved note</Text>
+                    <Text style={styles.savedWordNoteText}>{selectedWordHighlight.note}</Text>
+                  </View>
+                ) : null}
+              </ScrollView>
+              <View style={styles.wordModalActions}>
+                {selectedWordHighlight ? (
+                  <TouchableOpacity
+                    style={styles.wordRemoveButton}
+                    onPress={handleRemoveWordHighlight}
+                  >
+                    <Text style={styles.wordRemoveButtonText}>Remove highlight</Text>
+                  </TouchableOpacity>
+                ) : null}
+                <TouchableOpacity
+                  style={styles.wordSaveButton}
+                  onPress={handleSaveWordNote}
+                >
+                  <Text style={styles.wordSaveButtonText}>Save note</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+            </KeyboardAvoidingView>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
@@ -5144,25 +5316,30 @@ const splitContentIntoPages = (content: string): string[] => {
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
-const getContentSearchExcerpt = (text: string, term: string): string => {
+const getContentSearchExcerpts = (text: string, term: string): string[] => {
   const strippedText = stripMarkdownFormatting(text);
   const normalizedText = strippedText.replace(/\s+/g, ' ').trim();
   const normalizedTerm = term.trim().toLowerCase();
   const normalizedTextLower = normalizedText.toLowerCase();
+  if (!normalizedTerm) return [];
 
-  if (!normalizedTerm || !normalizedTextLower.includes(normalizedTerm)) {
-    return normalizedText.slice(0, 120);
+  const excerpts: string[] = [];
+  let searchFrom = 0;
+
+  while (searchFrom < normalizedTextLower.length) {
+    const matchIndex = normalizedTextLower.indexOf(normalizedTerm, searchFrom);
+    if (matchIndex < 0) break;
+
+    const start = Math.max(0, matchIndex - 60);
+    const end = Math.min(normalizedText.length, matchIndex + normalizedTerm.length + 90);
+    let excerpt = normalizedText.slice(start, end).trim();
+    if (start > 0) excerpt = `…${excerpt}`;
+    if (end < normalizedText.length) excerpt = `${excerpt}…`;
+    excerpts.push(excerpt);
+    searchFrom = matchIndex + normalizedTerm.length;
   }
 
-  const matchIndex = normalizedTextLower.indexOf(normalizedTerm);
-  const start = Math.max(0, matchIndex - 60);
-  const end = Math.min(normalizedText.length, matchIndex + normalizedTerm.length + 90);
-  let excerpt = normalizedText.slice(start, end).trim();
-
-  if (start > 0) excerpt = `…${excerpt}`;
-  if (end < normalizedText.length) excerpt = `${excerpt}…`;
-
-  return excerpt;
+  return excerpts;
 };
 
 const styles = StyleSheet.create({
@@ -5494,15 +5671,25 @@ const styles = StyleSheet.create({
   jumpResultItemLocked: {
     opacity: 0.75,
   },
-  showMoreButton: {
-    alignSelf: 'center',
+  searchResultPagination: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 16,
     marginTop: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 999,
-    backgroundColor: '#E2E8F0',
   },
-  showMoreButtonText: {
+  searchResultPageButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    backgroundColor: '#E2E8F0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  searchResultPageButtonDisabled: {
+    opacity: 0.4,
+  },
+  searchResultPageLabel: {
     color: '#334155',
     fontSize: 13,
     fontWeight: '700',
@@ -6241,6 +6428,110 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 13,
   },
+  wordModalActions: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 12,
+  },
+  wordModalKeyboard: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  wordDefinitionCard: {
+    width: '100%',
+    height: '75%',
+    minHeight: 280,
+    maxHeight: '85%',
+    flex: 0,
+  },
+  wordModalBody: {
+    flex: 1,
+  },
+  wordModalBodyContent: {
+    flexGrow: 1,
+  },
+  wordSaveButton: {
+    backgroundColor: '#4338CA',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  wordSaveButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  wordRemoveButton: {
+    backgroundColor: '#FEF2F2',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  wordRemoveButtonText: {
+    color: '#B91C1C',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  wordNoteLabel: {
+    marginTop: 16,
+    marginBottom: 6,
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#334155',
+  },
+  wordHighlightSwatches: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    marginBottom: 4,
+  },
+  wordHighlightSwatch: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: '#94A3B8',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  wordHighlightSwatchSelected: {
+    borderWidth: 3,
+    borderColor: '#0F172A',
+  },
+  savedWordNote: {
+    marginTop: 12,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#F8FAFC',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+  },
+  savedWordNoteLabel: {
+    marginBottom: 4,
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#64748B',
+  },
+  savedWordNoteText: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: '#0F172A',
+  },
+  wordNoteInput: {
+    minHeight: 88,
+    maxHeight: 150,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#CBD5E1',
+    borderRadius: 8,
+    fontSize: 14,
+    color: '#0F172A',
+  },
   topicTableWrapper: {
     marginTop: 8,
     marginBottom: 16,
@@ -6355,6 +6646,13 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textDecorationStyle: 'solid',
     textDecorationColor: '#4338CA',
+  },
+  savedWordHighlight: {
+    backgroundColor: '#FDE047',
+    color: '#713F12',
+    borderRadius: 6,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#A16207',
   },
   quoteBox: {
     backgroundColor: '#F8FAFC',

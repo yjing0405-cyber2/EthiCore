@@ -48,7 +48,7 @@ const QuizHubScreen: React.FC<Props> = ({ navigation }) => {
         </View>
 
         {/* Chapter list */}
-        {chapters.map((ch: { id: number; quizCompleted: boolean; highestQuizScore?: number; topics?: Array<{ completed: boolean }>; title: string }, index: number) => {
+        {chapters.map((ch: { id: number; quizCompleted: boolean; highestQuizScore?: number; quizAttempts?: number; topics?: Array<{ completed: boolean }>; title: string }, index: number) => {
           const quiz = buildQuizzes(chapters).find((q: { chapterId: number }) => q.chapterId === ch.id);
           const totalQuestions = quiz ? quiz.questions.length : 0;
           const attempts = (ch as any).quizAttempts ?? 0;
@@ -74,7 +74,7 @@ const QuizHubScreen: React.FC<Props> = ({ navigation }) => {
                     <View style={styles.statusBadge}>
                       {passed ? (
                         <View style={styles.passedCircle}><Ionicons name="checkmark" size={10} color="#fff" /></View>
-                      ) : ch.quizCompleted ? (
+                      ) : attempts > 0 ? (
                         <View style={styles.failedCircle}><Ionicons name="close" size={10} color="#fff" /></View>
                       ) : null}
                     </View>
@@ -83,10 +83,10 @@ const QuizHubScreen: React.FC<Props> = ({ navigation }) => {
 
                   <View style={styles.scoreRow}>
                     <View style={[styles.scorePill, { backgroundColor: cardAccentColor + '15' }]}> 
-                      <Text style={[styles.scorePillText, { color: cardAccentColor }]}>{ch.quizCompleted ? `${Math.min(100, Math.max(0, ch.highestQuizScore ?? 0))}%` : '—'}</Text>
+                      <Text style={[styles.scorePillText, { color: cardAccentColor }]}>{attempts > 0 ? `${Math.min(100, Math.max(0, ch.highestQuizScore ?? 0))}%` : '—'}</Text>
                     </View>
                     <View style={styles.scoreBarBg}>
-                      <View style={[styles.scoreBarFill, { width: `${Math.max(0, Math.min(100, ch.quizCompleted ? Math.min(100, Math.max(0, ch.highestQuizScore ?? 0)) : 0))}%` as any, backgroundColor: cardAccentColor }]} />
+                      <View style={[styles.scoreBarFill, { width: `${Math.max(0, Math.min(100, attempts > 0 ? Math.min(100, Math.max(0, ch.highestQuizScore ?? 0)) : 0))}%` as any, backgroundColor: cardAccentColor }]} />
                     </View>
                   </View>
                 </View>
@@ -111,9 +111,9 @@ const QuizHubScreen: React.FC<Props> = ({ navigation }) => {
                     }}
                     disabled={!canStartQuiz}
                   >
-                    <Ionicons name={!canStartQuiz ? 'lock-closed-outline' : (ch.quizCompleted ? 'refresh-outline' : 'play-outline')} size={16} color={!canStartQuiz ? '#fff' : (passed ? '#3B82F6' : '#fff')} />
+                    <Ionicons name={!canStartQuiz ? 'lock-closed-outline' : (ch.quizCompleted || attempts > 0 ? 'refresh-outline' : 'play-outline')} size={16} color={!canStartQuiz ? '#fff' : (passed ? '#3B82F6' : '#fff')} />
                     <Text style={!canStartQuiz ? styles.actionButtonTextLocked : (passed ? styles.actionButtonTextOutline : styles.actionButtonTextFilled)}>
-                      {ch.quizCompleted ? 'Retake Quiz' : 'Take Quiz'}
+                      {ch.quizCompleted || attempts > 0 ? 'Retake Quiz' : 'Take Quiz'}
                     </Text>
                   </TouchableOpacity>
                 </View>
